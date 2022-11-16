@@ -18,5 +18,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::prefix("/admin")->group(function() {
-    Route::get("/login", [MasterAdminController::class, "login"]);
+    Route::get('/login', function () {
+        return view('admin.login');
+    });
+    Route::POST("/logging", [MasterAdminController::class, "login"]);
+    Route::POST("/logout", [MasterAdminController::class, "logout"]);
+
+    Route::get('/transaksi', function () {
+        return view('admin.transaksi');
+    });
+    Route::get('/gudang', function () {
+        return view('admin.gudang');
+    });
+    Route::get('/manager', function () {
+        return view('admin.manager');
+    });
 });
