@@ -28,6 +28,11 @@ Route::prefix("/admin")->group(function() {
     Route::POST("/searchkaryawan", [MasterAdminController::class, "searchkaryawan"]);
     Route::POST("/tambahkaryawan", [MasterAdminController::class, "tambahkaryawan"]);
     Route::POST("/menambahkaryawan", [MasterAdminController::class, "menambahkaryawan"]);
+    Route::POST("/detailbarang", [MasterAdminController::class, "detailbarang"]);
+    Route::POST("/actionbarang", [MasterAdminController::class, "actionbarang"]);
+    Route::POST("/searchbarang", [MasterAdminController::class, "searchbarang"]);
+    Route::POST("/tambahbarang", [MasterAdminController::class, "tambahbarang"]);
+    Route::POST("/menambahbarang", [MasterAdminController::class, "menambahbarang"]);
     Route::POST("/logout", [MasterAdminController::class, "logout"]);
 
     Route::get('/transaksi', function () {

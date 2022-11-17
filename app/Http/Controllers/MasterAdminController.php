@@ -92,6 +92,7 @@ class MasterAdminController extends Controller
             Session::forget('filterreport');
             Session::forget('startDate');
             Session::forget('endDate');
+            Session::forget('caribarang');
             return redirect(url("/admin/login"));
         }
         if ($request->btnReport == 1) {
@@ -100,6 +101,9 @@ class MasterAdminController extends Controller
         if ($request->btnListKaryawan == 1) {
             Session::forget('carikaryawan');
             return redirect(url("/admin/listkaryawan"));
+        }
+        if ($request->btnListBarang == 1) {
+            return redirect(url("/admin/gudang"));
         }
     }
 
@@ -132,6 +136,86 @@ class MasterAdminController extends Controller
             ]
         );
         return view('admin.masterkaryawan');
+    }
+
+    public function detailbarang(Request $request){
+        $listBarang = DB::table('barang')->where('ID_Barang', $request->btnDetailBarang)->get();
+        return view('admin.detailbarang', compact('listBarang'));
+    }
+
+    public function actionbarang(Request $request){
+        $namaFilePhoto = "";
+        if ($request->file("photo") != null) {
+            $namaFolderPhoto = "";
+            foreach ($request->file("photo") as $photo) {
+                $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
+                $namaFolderPhoto = "photo/";
+    
+                $photo->storeAs($namaFolderPhoto,$namaFilePhoto, 'public'); // masuk ke storage/app/public
+            }
+        }
+        if ($request->btnEditBarang != null) {
+            DB::table('barang')->where('ID_Barang', $request->btnEditBarang)->update([
+                'Nama_Motor' => $request->nama,
+                'Warna_Motor' => $request->warna,
+                'Isi_Silinder' => $request->silinder,
+                'Harga_sewa' => $request->harga,
+                'Plat' => $request->plat,
+                'Tahun_Pembuatan' => $request->tahun,
+                'No_Rangka' => $request->rangka,
+                'No_Mesin' => $request->mesin,
+                'No_BPKB' => $request->bpkb,
+                'No_STNK' => $request->stnk,
+                'Status' => $request->status,
+                'gambar' => $namaFilePhoto
+            ]);
+        }else if ($request->btnDeleteBarang != null) {
+            DB::delete('delete from barang where ID_Barang = ?',
+            [
+                $request->btnDeleteBarang
+            ]);
+        }
+        Session::forget('caribarang');
+        return redirect(url("/admin/gudang"));
+    }
+
+    public function searchbarang(Request $request){
+        Session::put('caribarang', $request->cari);
+        return redirect(url("/admin/gudang"));
+    }
+
+    public function tambahbarang(Request $request){
+        return view('admin.tambahbarang');
+    }
+
+    public function menambahbarang(Request $request){
+        $namaFilePhoto = "";
+        if ($request->file("photo") != null) {
+            $namaFolderPhoto = "";
+            foreach ($request->file("photo") as $photo) {
+                $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
+                $namaFolderPhoto = "photo/";
+    
+                $photo->storeAs($namaFolderPhoto,$namaFilePhoto, 'public'); // masuk ke storage/app/public
+            }
+        }
+        DB::table('barang')->insert(
+            [
+                'Nama_Motor' => $request->nama,
+                'Warna_Motor' => $request->warna,
+                'Isi_Silinder' => $request->silinder,
+                'Harga_sewa' => $request->harga,
+                'Plat' => $request->plat,
+                'Tahun_Pembuatan' => $request->tahun,
+                'No_Rangka' => $request->rangka,
+                'No_Mesin' => $request->mesin,
+                'No_BPKB' => $request->bpkb,
+                'No_STNK' => $request->stnk,
+                'Status' => 1,
+                'gambar' => $namaFilePhoto
+            ]
+        );
+        return view('admin.gudang');
     }
 
 }
