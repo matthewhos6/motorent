@@ -24,6 +24,10 @@ Route::prefix("/admin")->group(function() {
     Route::POST("/logging", [MasterAdminController::class, "login"]);
     Route::POST("/filtertrans", [MasterAdminController::class, "filtertrans"]);
     Route::POST("/transstatus/{trans}/{karyawan}", [MasterAdminController::class, "transstatus"]);
+    Route::POST("/filterreport", [MasterAdminController::class, "filterreport"]);
+    Route::POST("/searchkaryawan", [MasterAdminController::class, "searchkaryawan"]);
+    Route::POST("/tambahkaryawan", [MasterAdminController::class, "tambahkaryawan"]);
+    Route::POST("/menambahkaryawan", [MasterAdminController::class, "menambahkaryawan"]);
     Route::POST("/logout", [MasterAdminController::class, "logout"]);
 
     Route::get('/transaksi', function () {
@@ -34,5 +38,8 @@ Route::prefix("/admin")->group(function() {
     });
     Route::get('/manager', function () {
         return view('admin.manager');
+    });
+    Route::get('/listkaryawan', function () {
+        return view('admin.listkaryawan');
     });
 });

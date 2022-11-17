@@ -65,10 +65,73 @@ class MasterAdminController extends Controller
         return redirect(url("/admin/transaksi"));
     }
 
-    public function logout(){
-        Session::forget('logid');
-        Session::forget('loguser');
-        return redirect(url("/admin/login"));
+    public function filterreport(Request $request){
+        if ($request->filter != null) {
+            Session::put('filterreport', $request->filter);
+        }
+        if ($request->filter == 2 || $request->filter == 3 || $request->filter == 4 || $request->filter == 5) {
+            Session::forget('startDate');
+            Session::forget('endDate');
+        }else{
+            Session::put('startDate', $request->dateAwal);
+            Session::put('endDate', $request->dateAkhir);
+        }
+
+        if ($request->resetDate == 1) {
+            Session::forget('startDate');
+            Session::forget('endDate');
+        }
+        return redirect(url("/admin/manager"));
+    }
+
+    public function logout(Request $request){
+        if ($request->btnLogout == 1) {
+            Session::forget('logid');
+            Session::forget('loguser');
+            Session::forget('filtertrans');
+            Session::forget('filterreport');
+            Session::forget('startDate');
+            Session::forget('endDate');
+            return redirect(url("/admin/login"));
+        }
+        if ($request->btnReport == 1) {
+            return redirect(url("/admin/manager"));
+        }
+        if ($request->btnListKaryawan == 1) {
+            Session::forget('carikaryawan');
+            return redirect(url("/admin/listkaryawan"));
+        }
+    }
+
+    public function searchkaryawan(Request $request){
+        Session::put('carikaryawan', $request->cari);
+        return redirect(url("/admin/listkaryawan"));
+    }
+
+    public function tambahkaryawan(Request $request){
+        return view('admin.masterkaryawan');
+    }
+
+    public function menambahkaryawan(Request $request){
+        // - php artisan storage:link
+        $namaFolderPhoto = ""; $namaFilePhoto = "";
+        foreach ($request->file("photo") as $photo) {
+            $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
+            $namaFolderPhoto = "photo/";
+
+            $photo->storeAs($namaFolderPhoto,$namaFilePhoto, 'public'); // masuk ke storage/app/public
+        }
+        DB::table('karyawan')->insert(
+            [
+                'Nama_Karyawan' => $request->nama,
+                'Username_Karyawan' => $request->username,
+                "NomorTelepon_Karyawan" => $request->noTelp,
+                "Password_Karyawan" => $request->password,
+                "FK_ID_JABATAN" => $request->jabatan,
+                "KTP_Karyawan" => $namaFilePhoto
+            ]
+        );
+        return view('admin.masterkaryawan');
     }
 
 }

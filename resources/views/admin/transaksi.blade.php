@@ -19,7 +19,7 @@ table, th, td {
         <h1 class="display-3 text-uppercase mb-3">Welcome, {{Session::get('loguser')}}</h1>
         <form action="{{ url("/admin/logout") }}" method="post">
             @csrf
-            <span><button type="submit" class="btn btn-danger">Logout</button> 
+            <span><button value="1" name="btnLogout" type="submit" class="btn btn-danger">Logout</button> 
         </form>
     </div>
     <br>
