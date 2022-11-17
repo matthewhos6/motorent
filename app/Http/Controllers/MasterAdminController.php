@@ -51,6 +51,20 @@ class MasterAdminController extends Controller
         }
     }
 
+    public function filtertrans(Request $request){
+        Session::put('filtertrans', $request->filter);
+        return redirect(url("/admin/transaksi"));
+    }
+
+    public function transstatus(Request $request){
+        if ($request->btnRejectTrans == 1) {
+            DB::table('transaksi')->where('ID_Trans', $request->trans)->update(['FK_ID_Karyawan' => $request->karyawan , 'Status' => -1]);
+        }else{
+            DB::table('transaksi')->where('ID_Trans', $request->trans)->update(['FK_ID_Karyawan' => $request->karyawan , 'Status' => 1]);
+        }
+        return redirect(url("/admin/transaksi"));
+    }
+
     public function logout(){
         Session::forget('logid');
         Session::forget('loguser');

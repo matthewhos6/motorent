@@ -22,6 +22,8 @@ Route::prefix("/admin")->group(function() {
         return view('admin.login');
     });
     Route::POST("/logging", [MasterAdminController::class, "login"]);
+    Route::POST("/filtertrans", [MasterAdminController::class, "filtertrans"]);
+    Route::POST("/transstatus/{trans}/{karyawan}", [MasterAdminController::class, "transstatus"]);
     Route::POST("/logout", [MasterAdminController::class, "logout"]);
 
     Route::get('/transaksi', function () {
