@@ -76,7 +76,7 @@ table, th, td {
                                 @if ($value->KTP_Karyawan == null)
                                     <td>Belum setor KTP</td>
                                 @else
-                                    <td> <img src="{{ asset("storage/photo/".$value->KTP_Karyawan) }}" style="margin: 10px;width:200px;height:200px;"></td>
+                                    <td> <img src="{{ asset("photo/".$value->KTP_Karyawan) }}" style="margin: 10px;width:200px;height:130px;"></td>
                                 @endif
                                 <td>{{$value->Nama_Karyawan}}</td>
                                 <td>{{$value->NomorTelepon_Karyawan}}</td>

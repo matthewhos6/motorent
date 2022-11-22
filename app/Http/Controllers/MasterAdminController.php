@@ -118,24 +118,39 @@ class MasterAdminController extends Controller
 
     public function menambahkaryawan(Request $request){
         // - php artisan storage:link
-        //kasih pengecekan
-        $namaFolderPhoto = ""; $namaFilePhoto = "";
-        foreach ($request->file("photo") as $photo) {
-            $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
-            $namaFolderPhoto = "photo/";
 
-            $photo->storeAs($namaFolderPhoto,$namaFilePhoto, 'public'); // masuk ke storage/app/public
+        //tak kasih pengecekan supaya ga error kalo admin ga insert foto ktp
+        if ($request->file("photo") != null) {
+            $namaFolderPhoto = ""; $namaFilePhoto = "";
+            foreach ($request->file("photo") as $photo) {
+                $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
+                $namaFolderPhoto = "photo/";
+
+                $photo->move(public_path($namaFolderPhoto),$namaFilePhoto); // masuk ke folder public/photo
+            }
+            DB::table('karyawan')->insert(
+                [
+                    'Nama_Karyawan' => $request->nama,
+                    'Username_Karyawan' => $request->username,
+                    "NomorTelepon_Karyawan" => $request->noTelp,
+                    "Password_Karyawan" => $request->password,
+                    "FK_ID_JABATAN" => $request->jabatan,
+                    "KTP_Karyawan" => $namaFilePhoto
+                ]
+            );
         }
-        DB::table('karyawan')->insert(
-            [
-                'Nama_Karyawan' => $request->nama,
-                'Username_Karyawan' => $request->username,
-                "NomorTelepon_Karyawan" => $request->noTelp,
-                "Password_Karyawan" => $request->password,
-                "FK_ID_JABATAN" => $request->jabatan,
-                "KTP_Karyawan" => $namaFilePhoto
-            ]
-        );
+        else {
+            DB::table('karyawan')->insert(
+                [
+                    'Nama_Karyawan' => $request->nama,
+                    'Username_Karyawan' => $request->username,
+                    "NomorTelepon_Karyawan" => $request->noTelp,
+                    "Password_Karyawan" => $request->password,
+                    "FK_ID_JABATAN" => $request->jabatan,
+                    "KTP_Karyawan" => null
+                ]
+            );
+        }
         return view('admin.masterkaryawan');
     }
 
@@ -152,24 +167,42 @@ class MasterAdminController extends Controller
                 $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
                 $namaFolderPhoto = "photo/";
     
-                $photo->storeAs($namaFolderPhoto,$namaFilePhoto, 'public'); // masuk ke storage/app/public
+                $photo->move(public_path($namaFolderPhoto),$namaFilePhoto); // masuk ke folder public/photo
             }
         }
         if ($request->btnEditBarang != null) {
-            DB::table('barang')->where('ID_Barang', $request->btnEditBarang)->update([
-                'Nama_Motor' => $request->nama,
-                'Warna_Motor' => $request->warna,
-                'Isi_Silinder' => $request->silinder,
-                'Harga_sewa' => $request->harga,
-                'Plat' => $request->plat,
-                'Tahun_Pembuatan' => $request->tahun,
-                'No_Rangka' => $request->rangka,
-                'No_Mesin' => $request->mesin,
-                'No_BPKB' => $request->bpkb,
-                'No_STNK' => $request->stnk,
-                'Status' => $request->status,
-                'gambar' => $namaFilePhoto
-            ]);
+            //tak buat pengecekan biar klo admin ga update gambar, gambar ga akan kerubah/null
+            if ($namaFilePhoto != "") {
+                DB::table('barang')->where('ID_Barang', $request->btnEditBarang)->update([
+                    'Nama_Motor' => $request->nama,
+                    'Warna_Motor' => $request->warna,
+                    'Isi_Silinder' => $request->silinder,
+                    'Harga_sewa' => $request->harga,
+                    'Plat' => $request->plat,
+                    'Tahun_Pembuatan' => $request->tahun,
+                    'No_Rangka' => $request->rangka,
+                    'No_Mesin' => $request->mesin,
+                    'No_BPKB' => $request->bpkb,
+                    'No_STNK' => $request->stnk,
+                    'Status' => $request->status,
+                    'gambar' => $namaFilePhoto
+                ]);
+            }
+            else {
+                DB::table('barang')->where('ID_Barang', $request->btnEditBarang)->update([
+                    'Nama_Motor' => $request->nama,
+                    'Warna_Motor' => $request->warna,
+                    'Isi_Silinder' => $request->silinder,
+                    'Harga_sewa' => $request->harga,
+                    'Plat' => $request->plat,
+                    'Tahun_Pembuatan' => $request->tahun,
+                    'No_Rangka' => $request->rangka,
+                    'No_Mesin' => $request->mesin,
+                    'No_BPKB' => $request->bpkb,
+                    'No_STNK' => $request->stnk,
+                    'Status' => $request->status
+                ]);
+            }
         }else if ($request->btnDeleteBarang != null) {
             DB::delete('delete from barang where ID_Barang = ?',
             [
@@ -197,7 +230,7 @@ class MasterAdminController extends Controller
                 $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
                 $namaFolderPhoto = "photo/";
     
-                $photo->storeAs($namaFolderPhoto,$namaFilePhoto, 'public'); // masuk ke storage/app/public
+                $photo->move(public_path($namaFolderPhoto),$namaFilePhoto); // masuk ke folder public/photo
             }
         }
         DB::table('barang')->insert(

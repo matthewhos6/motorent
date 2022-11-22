@@ -35,7 +35,7 @@ table, th, td {
         </div>
     </div>
     <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">Welcome, {{Session::get('loguser')}}</h1>
+        <h1 class="display-3 text-uppercase text-black mb-3">Welcome, {{Session::get('loguser')}}</h1>
     </div>
     @php
         $listBarang = DB::table('barang')->get();
@@ -81,8 +81,12 @@ table, th, td {
                                 <td>{{$value->Isi_Silinder}}cc</td>
                                 <td>{{$value->Plat}}</td>
                                 <td>{{$value->Tahun_Pembuatan}}</td>
-                                <td> <img src="{{ asset("storage/photo/".$value->gambar) }}" style="margin: 10px;width:150px;height:150px;"></td>
-                                <td>Rp <?= number_format($value->Harga_sewa,2,",",".") ?>/ Hari</td>
+                                @if ($value->gambar == null)
+                                    <td>Belum input gambar</td>
+                                @else
+                                <td> <img src="{{ asset("photo/".$value->gambar) }}" style="margin: 10px;width:150px;height:150px;"></td>
+                                @endif
+                                <td>Rp <?= number_format($value->Harga_sewa,2,",",".") ?>/ hari</td>
                                 <td><button name="btnDetailBarang" value="{{$value->ID_Barang}}" type="submit" class="btn btn-warning">Detail</button></td>
                             </tr>
                         @empty
