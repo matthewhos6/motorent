@@ -118,6 +118,7 @@ class MasterAdminController extends Controller
 
     public function menambahkaryawan(Request $request){
         // - php artisan storage:link
+        //kasih pengecekan
         $namaFolderPhoto = ""; $namaFilePhoto = "";
         foreach ($request->file("photo") as $photo) {
             $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
