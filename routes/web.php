@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\logregcontroller;
 use App\Http\Controllers\MasterAdminController;
+use App\Http\Controllers\usercontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/register', function () {
+    return view('register');
+});
+Route::POST("/login", [logregcontroller::class, "login"]);
+Route::POST("/register", [logregcontroller::class, "register"]);
+
 Route::prefix("/admin")->group(function() {
     Route::get('/login', function () {
         return view('admin.login');
@@ -47,4 +58,8 @@ Route::prefix("/admin")->group(function() {
     Route::get('/listkaryawan', function () {
         return view('admin.listkaryawan');
     });
+});
+
+Route::prefix("/user")->group(function(){
+    Route::get("/", [usercontroller::class, "home"])->name('home_user');
 });
