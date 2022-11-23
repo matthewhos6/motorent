@@ -2,8 +2,19 @@
 @section('title','Register')
 @section('judul','Register')
 @section('content')
+<br>
 <form action="{{url('/register')}}" method="post">
     @csrf
+    <p class="fs-2">Gender</p>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" value="L">
+        <label class="form-check-label" for="inlineRadio1">Laki-Laki</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" value="P">
+        <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+    </div>
+    <br><br>
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Username</span>
         <input type="text" class="form-control" placeholder="" name="username" value="{{ old('username') }}">

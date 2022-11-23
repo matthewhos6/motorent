@@ -21,7 +21,7 @@ class logregcontroller extends Controller
         if ($user!=null) {
             $cek = password_verify($req->pass,$user->Password);
             if ($cek) {
-                Session::put('login',$req->username);
+                Session::put('login',$user->Username);
                 return redirect(route('home_user'));
             }else{
                 return back()->with('err','Password tidak benar');
@@ -36,11 +36,11 @@ class logregcontroller extends Controller
         $req->validate([
             'username' => 'required|alpha_num',
             'fullname' => 'required',
-            'NIK' => 'numeric|min:16',
             'telepon' => 'required|numeric|min:10',
             'email' => 'required|email',
             'pass' => 'required|alpha_num',
-            'conf' => 'required'
+            'conf' => 'required',
+            'gender' => 'required',
         ]);
 
         // $cek = User::find()->where('username','=',$req->username)
@@ -63,9 +63,16 @@ class logregcontroller extends Controller
                 $new->Email = $req->email;
                 $new->Password = password_hash($req->pass,PASSWORD_DEFAULT);
                 $new->Status = 0;
+                $new->gender = $req->gender;
                 $new->save();
                 return back()->with('suc','Berhasil Register');
             }
         }
+    }
+
+    public function logout()
+    {
+        Session::forget('login');
+        return redirect()->to(route('landing'));
     }
 }
