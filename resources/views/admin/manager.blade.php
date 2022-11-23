@@ -286,10 +286,10 @@ table, th, td {
                             @endforelse
                         @elseif ($filter == 4)
                             @php
-                                $listTrans = DB::select('SELECT u.Username_User,u.Nama_User,count(tr.FK_ID_USER) as transaksinya,sum(tr.Total) as total
+                                $listTrans = DB::select('SELECT u.Username,u.fullname,count(tr.FK_ID_USER) as transaksinya,sum(tr.Total) as total
                                         FROM transaksi tr
                                         INNER JOIN user u on tr.FK_ID_USER = u.ID_User
-                                        WHERE tr.Status = 1 GROUP BY u.Username_User,u.Nama_User');
+                                        WHERE tr.Status = 1 GROUP BY u.Username,u.fullname');
                             @endphp
                             @forelse ($listTrans as $value)
                                 <tr>
