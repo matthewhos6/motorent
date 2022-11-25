@@ -74,7 +74,7 @@ table, th, td {
                                 @forelse ($listUser as $user)
                                     @if ($user->ID_User == $value->FK_ID_USER)
                                         @php
-                                            $usernya = $user->Nama_User;
+                                            $usernya = $user->fullname;
                                         @endphp
                                     @endif
                                 @empty
@@ -132,7 +132,7 @@ table, th, td {
                                 @forelse ($listUser as $user)
                                     @if ($user->ID_User == $value->FK_ID_USER)
                                         @php
-                                            $usernya = $user->Nama_User;
+                                            $usernya = $user->fullname;
                                         @endphp
                                     @endif
                                 @empty
@@ -190,7 +190,7 @@ table, th, td {
                                 @forelse ($listUser as $user)
                                     @if ($user->ID_User == $value->FK_ID_USER)
                                         @php
-                                            $usernya = $user->Nama_User;
+                                            $usernya = $user->fullname;
                                         @endphp
                                     @endif
                                 @empty
@@ -248,7 +248,7 @@ table, th, td {
                                 @forelse ($listUser as $user)
                                     @if ($user->ID_User == $value->FK_ID_USER)
                                         @php
-                                            $usernya = $user->Nama_User;
+                                            $usernya = $user->fullname;
                                         @endphp
                                     @endif
                                 @empty

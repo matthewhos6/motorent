@@ -17,8 +17,8 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session::get('login') != 'admin') {
-            return redirect()->to(route('landing'));
+        if (Session::get('admin') != 'admin') {
+            return redirect()->to(route('adminlog'))->with('msg', 'Silahkan Login terlebih dahulu!');;
          }
         return $next($request);
     }

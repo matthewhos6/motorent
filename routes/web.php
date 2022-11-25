@@ -4,6 +4,7 @@ use App\Http\Controllers\logregcontroller;
 use App\Http\Controllers\MasterAdminController;
 use App\Http\Controllers\usercontroller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +31,14 @@ Route::get("/logout", [logregcontroller::class, "logout"]);
 Route::POST("/login", [logregcontroller::class, "login"]);
 Route::POST("/register", [logregcontroller::class, "register"]);
 
+Route::prefix("/admin")->group(function() {
+    Route::get('/login', function () {
+        return view('admin.login');
+    })->name('adminlog');
+    Route::POST("/logging", [MasterAdminController::class, "login"]);
+});
 Route::middleware('isadmin')->group(function () {
     Route::prefix("/admin")->group(function() {
-        Route::get('/login', function () {
-            return view('admin.login');
-        });
-        Route::POST("/logging", [MasterAdminController::class, "login"]);
         Route::POST("/filtertrans", [MasterAdminController::class, "filtertrans"]);
         Route::POST("/transstatus/{trans}/{karyawan}", [MasterAdminController::class, "transstatus"]);
         Route::POST("/filterreport", [MasterAdminController::class, "filterreport"]);
@@ -45,6 +48,7 @@ Route::middleware('isadmin')->group(function () {
         Route::POST("/detailbarang", [MasterAdminController::class, "detailbarang"]);
         Route::POST("/actionbarang", [MasterAdminController::class, "actionbarang"]);
         Route::POST("/searchbarang", [MasterAdminController::class, "searchbarang"]);
+        Route::GET("/searchbarang/{nama}", [MasterAdminController::class, "getsearchbarang"]);
         Route::POST("/tambahbarang", [MasterAdminController::class, "tambahbarang"]);
         Route::POST("/menambahbarang", [MasterAdminController::class, "menambahbarang"]);
         Route::POST("/logout", [MasterAdminController::class, "logout"]);
@@ -53,7 +57,8 @@ Route::middleware('isadmin')->group(function () {
             return view('admin.transaksi');
         });
         Route::get('/gudang', function () {
-            return view('admin.gudang');
+            $searched = null;
+            return view('admin.gudang', compact("searched"));
         });
         Route::get('/manager', function () {
             return view('admin.manager');

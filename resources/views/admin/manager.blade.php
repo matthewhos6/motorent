@@ -58,9 +58,9 @@ table, th, td {
                     }
                     $listTrans = "";
                     if (Session::get('startDate') != null && Session::get('endDate') != null) {
-                        $listTrans = DB::table('transaksi')->get()->where('Tanggal_Trans', '>=', Session::get('startDate'))->where('Tanggal_Trans', '<=', Session::get('endDate'));
+                        $listTrans = DB::table('transaksi')->get()->where('Tanggal_Trans', '>=', Session::get('startDate'))->where('Tanggal_Trans', '<=', Session::get('endDate'))->where('Status', '=', '1');
                     }else{
-                        $listTrans = DB::table('transaksi')->get();
+                        $listTrans = DB::table('transaksi')->get()->where('Status', '=', '1');
                     }
                     $listUser = DB::table('user')->get();
                     $listKaryawan = DB::table('karyawan')->get();
@@ -118,6 +118,7 @@ table, th, td {
                                 <th>Durasi</th>
                                 <th>Customer</th>
                                 <th>Motor</th>
+                                <th>Gambar</th>
                                 <th>No STNK</th>
                                 <th>Total</th>                  
                                 <th>Action/Status</th>
@@ -163,7 +164,7 @@ table, th, td {
                                 @forelse ($listUser as $user)
                                 @if ($user->ID_User == $value->FK_ID_USER)
                                     @php
-                                        $usernya = $user->Nama_User;
+                                        $usernya = $user->fullname;
                                     @endphp
                                 @endif
                                 @empty
@@ -174,6 +175,7 @@ table, th, td {
                                         @php
                                             $barangnya = $barang->Nama_Motor;
                                             $stnk = $barang->No_STNK;
+                                            $gambarnya = $barang->gambar;
                                         @endphp
                                     @endif
                                 @empty
@@ -193,6 +195,11 @@ table, th, td {
                                 <td><p>From : {{$value->Start_Date}}</p><p>To : {{$value->End_Date}}</p><p>Durasi : {{$value->FK_ID_SUBSCRIPTION}} Hari</p></td>
                                 <td>{{$usernya}}</td>
                                 <td>{{$barangnya}}</td>
+                                @if ($gambarnya == null)
+                                    <td>Belum input gambar</td>
+                                @else
+                                    <td> <img src="{{ asset("photo/".$gambarnya) }}" style="margin: 10px;width:120px;height:120px;"></td>
+                                @endif
                                 <td>{{$stnk}}</td>
                                 <td>Rp {{number_format($value->Total,2,",",".")}}</td>
                                 <td>
@@ -203,11 +210,11 @@ table, th, td {
                                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}
                                         @endif
                                     @else
-                                        <form action="{{url('admin/transstatus/'.$value->ID_Trans.'/'.Session::get('logid') )}}" method="post">
+                                        {{-- <form action="{{url('admin/transstatus/'.$value->ID_Trans.'/'.Session::get('logid') )}}" method="post">
                                             @csrf
                                             <button name="btnRejectTrans" value="1" type="submit" class="btn btn-danger">Reject</button>
                                             <button name="btnAcceptTrans" value="1" type="submit" class="btn btn-success">Accept</button>
-                                        </form>
+                                        </form> --}}
                                     @endif
                                 </td>
                             </tr>
@@ -219,7 +226,7 @@ table, th, td {
                                 @forelse ($listUser as $user)
                                 @if ($user->ID_User == $value->FK_ID_USER)
                                     @php
-                                        $usernya = $user->Nama_User;
+                                        $usernya = $user->fullname;
                                     @endphp
                                 @endif
                                 @empty
@@ -293,8 +300,8 @@ table, th, td {
                             @endphp
                             @forelse ($listTrans as $value)
                                 <tr>
-                                    <td>{{$value->Username_User}}</td>
-                                    <td>{{$value->Nama_User}}</td>
+                                    <td>{{$value->Username}}</td>
+                                    <td>{{$value->fullname}}</td>
                                     <td>{{$value->transaksinya}}</td>
                                     <td>Rp {{number_format($value->total,2,",",".")}}</td>
                                 </tr>

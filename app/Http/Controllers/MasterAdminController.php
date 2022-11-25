@@ -39,6 +39,7 @@ class MasterAdminController extends Controller
         if($log){
             Session::put('logid', $logid);
             Session::put('loguser', $loguser);
+            Session::put('admin', 'admin');
             if ($jabatan == 0) {
                 return redirect(url("/admin/transaksi"));
             }else if ($jabatan == 1) {
@@ -93,6 +94,7 @@ class MasterAdminController extends Controller
             Session::forget('startDate');
             Session::forget('endDate');
             Session::forget('caribarang');
+            Session::forget('admin');
             return redirect(url("/admin/login"));
         }
         if ($request->btnReport == 1) {
@@ -214,8 +216,18 @@ class MasterAdminController extends Controller
     }
 
     public function searchbarang(Request $request){
-        Session::put('caribarang', $request->cari);
-        return redirect(url("/admin/gudang"));
+        //Session::put('caribarang', $request->cari);
+        if ($request->cari == null) {
+            $searched = $request->cari;
+            return view('admin.gudang', compact("searched"));
+        }else{
+            return redirect(url("/admin/searchbarang/".$request->cari));
+        }
+    }
+
+    public function getsearchbarang(Request $request){
+        $searched = $request->nama;
+        return view('admin.gudang', compact("searched"));
     }
 
     public function tambahbarang(Request $request){
@@ -249,7 +261,8 @@ class MasterAdminController extends Controller
                 'gambar' => $namaFilePhoto
             ]
         );
-        return view('admin.gudang');
+        $searched = null;
+        return view('admin.gudang', compact("searched"));
     }
 
 }

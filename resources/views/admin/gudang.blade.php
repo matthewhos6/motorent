@@ -38,9 +38,15 @@ table, th, td {
         <h1 class="display-3 text-uppercase text-black mb-3">Welcome, {{Session::get('loguser')}}</h1>
     </div>
     @php
-        $listBarang = DB::table('barang')->get();
-        if (Session::get('caribarang') != null) {
-            $listBarang = DB::table('barang')->where('Nama_Motor', 'like', '%'.Session::get('caribarang').'%')->get();
+        // $listBarang = DB::table('barang')->get();
+        // if (Session::get('caribarang') != null) {
+        //     $listBarang = DB::table('barang')->where('Nama_Motor', 'like', '%'.Session::get('caribarang').'%')->get();
+        // }else {
+        //     $listBarang = DB::table('barang')->get();
+        // }
+
+        if ($searched != null) {
+            $listBarang = DB::table('barang')->where('Nama_Motor', 'like', '%'.$searched.'%')->get();
         }else {
             $listBarang = DB::table('barang')->get();
         }
@@ -51,7 +57,8 @@ table, th, td {
         <div class="container">
         <form action="{{ url("/admin/searchbarang") }}" method="post">
             @csrf
-            Model : <input value="{{Session::get('caribarang')}}" type="text" name="cari" size="50px"> <button name="btnSearch" type="submit" class="btn btn-info">Search</button></form> <br>
+            Model : <input value="{{$searched}}" type="text" name="cari" size="50px"> <button name="btnSearch" type="submit" class="btn btn-info">Search</button></form> <br>
+            {{-- Model : <input value="{{Session::get('caribarang')}}" type="text" name="cari" size="50px"> <button name="btnSearch" type="submit" class="btn btn-info">Search</button></form> <br> --}}
         <form action="{{ url("/admin/tambahbarang") }}" method="post">
             @csrf
         <button name="btnMaster" type="submit" class="btn btn-success">Tambah Barang</button>
