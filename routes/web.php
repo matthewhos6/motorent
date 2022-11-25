@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-//Home found
+//Pages interactions admin done
 
 Route::get('/', function () {
     return view('landing');
