@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-//app deployed to web server
+//Home found
 
 Route::get('/', function () {
     return view('landing');
