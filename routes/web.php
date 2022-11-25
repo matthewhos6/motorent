@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
+//app deployed to web server
+
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
