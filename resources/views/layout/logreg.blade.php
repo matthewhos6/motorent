@@ -18,11 +18,17 @@
             background-color: #DBE2EF;
             margin: auto;
             width: 40%;
-            padding: 40px;
+            padding: 20px;
+            margin-top: 20px;
         }
         #brand{
             font-family: 'Cabin', sans-serif;
-            font-size: 70px;
+            font-size: 80px;
+            text-decoration: none;
+            color: #3F72AF;
+        }
+        #brand:hover{
+            color: #021833;
         }
     </style>
   </head>
@@ -30,7 +36,7 @@
     <div class="container-fluid">
         <div class="cage rounded rounded-5 border border-5">
             <div class="text-center">
-                <h1 id="brand">MotoRent</h1>
+                <a id="brand" href="{{url(route('landing'))}}">MotoRent</a>
                 <h1 class="fw-light" style="margin-top: 20px">@yield('judul')</h1>
 
                 @yield('content')
