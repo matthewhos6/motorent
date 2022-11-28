@@ -7,9 +7,9 @@
     <title>AdminLogin</title>
   </head>
   <body style="background-color: #0089DD;">
-  <form method="POST">
-      <button style="margin-left: 1%;margin-top: 1%;" name="balik" type="submit" class="btn btn-danger">Kembali ke Home</button>
-  </form>
+  <a href="/">
+      <button style="margin-left: 1%;margin-top: 1%;" name="balik" class="btn btn-danger">Kembali ke Home</button>
+  </a>
   <form action="{{ url("/admin/logging") }}" method="post">
     @csrf
     <center><div style="margin-top: 130px;width: 500px;height: 370px;background-color: white;border-radius: 3px">
