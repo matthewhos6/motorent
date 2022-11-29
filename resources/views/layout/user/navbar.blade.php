@@ -5,10 +5,10 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="/user/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
+                <a class="nav-link" href="/user/profil">Profile</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Order</a>
@@ -21,6 +21,6 @@
       </div>
     </nav>
     <h1>
-      Hai , {{$user->Username}}
+      Hai , {{ucfirst($user->Username)}}
     </h1>
     

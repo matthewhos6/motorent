@@ -15,4 +15,12 @@ class usercontroller extends Controller
             'user' => $user
         ]);
     }
+
+    public function profil()
+    {
+        $user = User::where('username','=',Session::get('login'))->first();
+        return view('user.profil',[
+            'user' => $user
+        ]);
+    }
 }
