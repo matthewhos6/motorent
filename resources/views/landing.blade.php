@@ -31,7 +31,9 @@
         }
         #btnRegister:hover{
             color: #497fbd;
+
         }
+
         </style>
     </head>
     <body>
@@ -41,11 +43,11 @@
                 <a class="btn" href="{{url('/login')}}" style="color:white;" id="btnLogin">Login</a>
             </div>
         </nav>
-        <header class="masthead">
+        <header class="masthead" style="background-image: url('{{asset('pic/bg.jpg')}}');">
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-8">
-                        <div class="text-center text-white">
+                        <div class="text-center text-white rounded rounded-5 p-3 shadow">
                             <h1 class="mb-5 fw-light fs-1">Selamat datang di MotoRent , Situs peminjaman motor pertama di Indonesia yang fully-online , mau meminjam motor ?
                                 <span>
                                     <a href="{{url('/register')}}" id="btnRegister">Bergabunglah bersama kami</a>

@@ -1,5 +1,6 @@
 @extends('layout.user.master')
 @section('title','Home')
+@section('profile','active')
 @section('content')
 <div style="display:flex;justify-content: center;align-items: center;">
     <div class="container ps-5 pe-5 pt-3 pb-2" style="border-radius:15px;background-color: rgb(200, 223, 255); width:580px;height:580px;box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);margin: 2rem auto 2rem auto;">
