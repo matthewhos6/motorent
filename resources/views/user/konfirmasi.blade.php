@@ -11,7 +11,7 @@ data-client-key="SB-Mid-client-CpcaTeG-vOo1kH4C"></script>
     //tambah diatas sini
     <button id="pay-button">Pay!</button>
 
-    <form action="" method="post" id="checkout">
+    <form method="post" id="checkout">
         @csrf
         <input type="hidden" name="json" id="json">
     </form>

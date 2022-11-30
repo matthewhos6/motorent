@@ -46,6 +46,7 @@ class usercontroller extends Controller
 
         $params = array(
             'transaction_details' => array(
+                'order_id' => 'temp',
                 'gross_amount' => $total,
             ),
             'customer_details' => array(
@@ -64,5 +65,6 @@ class usercontroller extends Controller
 
     public function cout(Request $request){
         $data = json_decode($request->json);
+        dd($data);
     }
 }
