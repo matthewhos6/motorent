@@ -76,6 +76,8 @@ Route::middleware('islogin')->group(function () {
     Route::prefix("/user")->group(function(){
         Route::get("/", [usercontroller::class, "home"])->name('home_user');
         Route::get("/profil", [usercontroller::class, "profil"])->name('profil_user');
+        Route::get("/barang/{id}", [usercontroller::class, "detailbarang"]);
+        Route::get("/barang/{id}/konfirmasi/", [usercontroller::class, "confirm_page"]);
     });
 });
 

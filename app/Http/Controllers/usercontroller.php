@@ -26,4 +26,21 @@ class usercontroller extends Controller
             'user' => $user
         ]);
     }
+
+    public function detailbarang($id)
+    {
+        $barang = barang::find($id);
+        return view('user.detail_barang',[
+            'barang' => $barang
+        ]);
+    }
+
+    public function konfirmasi($id){
+        $user = User::where('username','=',Session::get('login'))->first();
+        $barang = barang::find($id);
+        return view('user.detail_barang',[
+            'barang' => $barang,
+            'user' => $user
+        ]);
+    }
 }
