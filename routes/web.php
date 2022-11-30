@@ -78,6 +78,8 @@ Route::middleware('islogin')->group(function () {
         Route::get("/profil", [usercontroller::class, "profil"])->name('profil_user');
         Route::get("/barang/{id}", [usercontroller::class, "detailbarang"]);
         Route::get("/barang/{id}/konfirmasi/", [usercontroller::class, "confirm_page"]);
+
+        Route::post("/barang/{id}/konfirmasi/", [usercontroller::class, "cout"]);
     });
 });
 

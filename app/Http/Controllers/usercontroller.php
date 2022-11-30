@@ -35,12 +35,34 @@ class usercontroller extends Controller
         ]);
     }
 
-    public function konfirmasi($id){
+    public function konfirmasi($id,$total){
         $user = User::where('username','=',Session::get('login'))->first();
-        $barang = barang::find($id);
+
+        //midtrans
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-71iRc-1uVVdAXCs_PXk9cB2q';
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'gross_amount' => $total,
+            ),
+            'customer_details' => array(
+                'first_name' => $user->fullname,
+                'email' => $user->Email,
+                'phone' =>$user->Telepon,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
         return view('user.konfirmasi',[
-            'barang' => $barang,
-            'user' => $user
+            'user' => $user,
+            'token' => $snapToken
         ]);
+    }
+
+    public function cout(Request $request){
+        $data = json_decode($request->json);
     }
 }
