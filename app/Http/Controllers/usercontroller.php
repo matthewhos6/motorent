@@ -38,7 +38,7 @@ class usercontroller extends Controller
     public function konfirmasi($id){
         $user = User::where('username','=',Session::get('login'))->first();
         $barang = barang::find($id);
-        return view('user.detail_barang',[
+        return view('user.konfirmasi',[
             'barang' => $barang,
             'user' => $user
         ]);

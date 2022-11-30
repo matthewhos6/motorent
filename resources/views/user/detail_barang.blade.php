@@ -39,6 +39,9 @@
                 <p class="fs-3 fw-light">Plat Nomor :{{$barang->Plat}}</p>
                 <p class="fs-3 fw-light">Warna :{{$barang->Warna_Motor}}</p>
             </div>
+            <form action="" method="post">
+
+            </form>
             <a href="{{url()->current()."/barang/$barang->ID_Barang/konfirmasi"}}">Sewa</a>
         </div>
     </div>
