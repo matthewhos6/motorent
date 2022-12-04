@@ -35,7 +35,7 @@ class usercontroller extends Controller
         ]);
     }
 
-    public function konfirmasi($id,$total){
+    public function konfirmasi(Request $request){
         $user = User::where('username','=',Session::get('login'))->first();
 
         //midtrans
@@ -46,8 +46,8 @@ class usercontroller extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => 'temp',
-                'gross_amount' => $total,
+                'order_id' => rand(),
+                'gross_amount' => $request->harga,
             ),
             'customer_details' => array(
                 'first_name' => $user->fullname,
