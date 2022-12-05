@@ -29,7 +29,7 @@ class MasterAdminController extends Controller
         $loguser = "";
         $jabatan = 0;
         foreach ($listUser as $value) {
-            if ($value->Username_Karyawan == $request->username && $value->Password_Karyawan == $request->password) {
+            if ($value->Username_Karyawan == $request->username &&  password_verify($request->password,$value->Password_Karyawan)) {
                 $log = true;
                 $logid = $value->ID_Karyawan;
                 $loguser = $value->Nama_Karyawan;
@@ -135,7 +135,7 @@ class MasterAdminController extends Controller
                     'Nama_Karyawan' => $request->nama,
                     'Username_Karyawan' => $request->username,
                     "NomorTelepon_Karyawan" => $request->noTelp,
-                    "Password_Karyawan" => $request->password,
+                    "Password_Karyawan" => password_hash($request->password,PASSWORD_DEFAULT),
                     "FK_ID_JABATAN" => $request->jabatan,
                     "KTP_Karyawan" => $namaFilePhoto
                 ]
@@ -147,7 +147,7 @@ class MasterAdminController extends Controller
                     'Nama_Karyawan' => $request->nama,
                     'Username_Karyawan' => $request->username,
                     "NomorTelepon_Karyawan" => $request->noTelp,
-                    "Password_Karyawan" => $request->password,
+                    "Password_Karyawan" => password_hash($request->password,PASSWORD_DEFAULT),
                     "FK_ID_JABATAN" => $request->jabatan,
                     "KTP_Karyawan" => null
                 ]
