@@ -87,12 +87,14 @@
     </div>
     <br><br>
     <div class="row rounded rounded-5 border border-5 p-3" style="background-color: #DBE2EF;">
-        <form action="{{url()->current()}}/konfirmasi" method="">
+        <form action="{{url()->current()}}" method="post">
+            @csrf
             <p class="fs-5 fw-light">Mau sewa berapa hari?</p>
             <input type="number" name="" id="hari"  min="1">  X {{$barang->Harga_sewa}}
             <br>
             Total : <p id="total" class="fs-2 fw-bold"></p>
             <input type="hidden" name="harga" id="harga">
+            <input type="hidden" name="thari" id="thari">
             <button type="submit" class="btn btn-primary">Konfirmasi</button>
         </form>
     </div>
@@ -105,9 +107,11 @@
             total = $("#hari").val() * {{$barang->Harga_sewa}};
             $("#total").text(total);
             $("#harga").val(total);
+            $("#thari").val($("#hari").val());
         });
         $("#total").text(total);
         $("#harga").val(total);
+        $("#thari").val($("#hari").val());
     });
 </script>
 @endsection
