@@ -2,9 +2,11 @@
 @section('title','Home')
 @section('profile','active')
 @section('content')
+<div class="container-fluid page-header">
+    <h1 class="display-3 text-uppercase text-white mb-3">Your Profile</h1>
+</div>
 <div style="display:flex;justify-content: center;align-items: center;">
     <div class="container ps-5 pe-5 pt-3 pb-2" style="border-radius:15px;background-color: rgb(200, 223, 255); width:580px;height:580px;box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);margin: 2rem auto 2rem auto;">
-        <center class="mt-3"><h3>Your Profile</h3></center>
         <div class="row mt-5">
             <div class="col-5">
                 <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Full Name</label>
@@ -13,7 +15,7 @@
                 <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">:</label>
             </div>
             <div class="col-5">
-                <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">{{$user->fullname}}</label>
+                <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">{{ucfirst($user->fullname)}}</label>
             </div>
         </div>
         <div class="row">
@@ -76,4 +78,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

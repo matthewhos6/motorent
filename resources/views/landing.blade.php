@@ -39,8 +39,8 @@
     <body>
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!" id="brand">MotoRent</a>
-                <a class="btn" href="{{url('/login')}}" style="color:white;" id="btnLogin">Login</a>
+                <a class="navbar-brand" href="{{url(route('landing'))}}" id="brand">MotoRent</a>
+                <a class="btn" href="{{url('/login')}}" style="font-size: 20px">Login</a>
             </div>
         </nav>
         <header class="masthead" style="background-image: url('{{asset('pic/bg.jpg')}}');">

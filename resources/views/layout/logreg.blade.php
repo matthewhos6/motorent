@@ -30,6 +30,9 @@
         #brand:hover{
             color: #021833;
         }
+        body{
+            background: linear-gradient(rgba(70, 73, 99, 0.9), rgba(70, 73, 99, 0.9)), url({{asset('pic/motor-login.jpg')}});
+        }
     </style>
   </head>
   <body>
