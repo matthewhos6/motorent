@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2022 at 06:10 PM
+-- Generation Time: Dec 06, 2022 at 07:55 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -56,6 +56,7 @@ CREATE TABLE `barang` (
   `Warna_Motor` varchar(50) NOT NULL,
   `Tahun_Pembuatan` date NOT NULL,
   `gambar` varchar(255) DEFAULT NULL,
+  `jumlah_gambar` int(11) DEFAULT NULL,
   `Status` int(2) NOT NULL,
   `FK_ID_ASURANSI` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -64,15 +65,8 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`ID_Barang`, `No_Rangka`, `No_Mesin`, `Plat`, `No_BPKB`, `No_STNK`, `Harga_sewa`, `Isi_Silinder`, `Nama_Motor`, `Warna_Motor`, `Tahun_Pembuatan`, `gambar`, `Status`, `FK_ID_ASURANSI`) VALUES
-(1, 'b234212s', 'sd3425f3', 'l54f', 'f324rs3', 'fgert4t', 10000, 125, 'sekupi', 'hihitam', '2019-09-11', 'OyoOpi5z.jpg', 1, NULL),
-(3, 'kujyhtgre343t5ytg', 'thgtfu76y', 'd 032 l', '3435467876564', '56546575', 200000, 160, 'vario', 'warna warni', '2021-04-14', '8vgfJ7dV.jpg', 1, NULL),
-(4, 'adawsrey', 'rw4t65yref', 'JA2123', 'THDGSER', 'MUHYERG', 56000, 123, 'UNYU', 'UNGU', '2022-11-15', NULL, 0, NULL),
-(5, 'sadas', 'sa', 'DD 012 l', 'a', '123', 10000, 200, 'apple', 'hitem', '2022-11-29', 'WHQpgyBP.jpg', 1, NULL),
-(6, 'ASDWQE', 'SCDAWQ', 'TESD2', 'XCZSDSAW', 'NYHGFGTDRGT', 10000, 200, 'kucing', 'warna warni', '2022-11-25', 'jxeMGMFK.jpg', 1, NULL),
-(7, 'ydtrsetwrqewerey', 'rw4t65yref', 'JA2123', 'THDGSER', 'MUHYERG', 56000, 123, 'UNYU', 'UNGU', '2022-11-15', NULL, 1, NULL),
-(8, 'YRTFSAER', '3REGR43WEF', 'KO 4322', 'GFHFTRE3', 'IUYT4SD', 23000, 500, 'MASYA', 'MERAH', '2022-11-06', NULL, 1, NULL),
-(9, 'ASDWQE', 'SCDAWQ', 'TESD2', 'XCZSDSAW', 'NYHGFGTDRGT', 10000, 200, 'kucing', 'warna warni', '2022-11-25', 'oV0xUDLd.jpg', 1, NULL);
+INSERT INTO `barang` (`ID_Barang`, `No_Rangka`, `No_Mesin`, `Plat`, `No_BPKB`, `No_STNK`, `Harga_sewa`, `Isi_Silinder`, `Nama_Motor`, `Warna_Motor`, `Tahun_Pembuatan`, `gambar`, `jumlah_gambar`, `Status`, `FK_ID_ASURANSI`) VALUES
+(15, 'saya', 'asddas', 'gelap', 'adsads', 'ads', 11, 3, 'dhana', 'hitam biar sangar', '2022-12-06', 'MxbJ6cTD', 2, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -162,16 +156,6 @@ CREATE TABLE `transaksi` (
   `Status` int(2) NOT NULL COMMENT '-1 = ditolak\r\n0 = pending\r\n1 = diterima'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`ID_Trans`, `FK_ID_USER`, `FK_ID_Karyawan`, `FK_ID_Barang`, `Total`, `Tanggal_Trans`, `Start_Date`, `FK_ID_SUBSCRIPTION`, `End_Date`, `Bukti_Bayar`, `Status`) VALUES
-(1, 3, 1, 5, 150000, '2022-09-29', '2022-09-29', 1, '2022-11-17', NULL, 1),
-(2, 3, 1, 1, 150000, '2022-09-29', '2022-09-29', 1, '2022-10-04', NULL, 1),
-(3, 4, NULL, 1, 40000, '2022-12-06', '2022-12-05', NULL, '2022-12-09', NULL, 0),
-(4, 4, NULL, 1, 150000, '2022-12-07', '2022-12-06', NULL, '2022-12-21', NULL, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -198,7 +182,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`ID_User`, `fullname`, `NIK`, `Telepon`, `Username`, `Email`, `Password`, `Status`, `gender`, `KTP_User`) VALUES
 (3, 'ini user testing', '7471053112010003', '081342025314', 'test123', 'test@gmail.com', '$2y$10$gvzxZ7VHfpHCvfo9UQ.Zh.goL1QSH7YFFAeKSlaYxRVVrx006.aga', 0, 'L', NULL),
-(4, 'ini user testing 2', NULL, '081342025314', 'test1', 'test@gmail.com', '$2y$10$DsD8fNhNSKRu4eeAEVuzxO506umFNjSmKYMMeKjAk.Lw9plwuNrW2', 0, 'L', NULL);
+(4, 'ini user testing 2', NULL, '081342025314', 'test1', 'test@gmail.com', '$2y$10$DsD8fNhNSKRu4eeAEVuzxO506umFNjSmKYMMeKjAk.Lw9plwuNrW2', 0, 'L', NULL),
+(5, 'a', '12312312312', '132312', 'a', 'sfdsfsd@fsaaf', '$2y$10$5eQdGey1G8o368gB9HGSoeH5ekWVmSqV1c405nqELgx.WHjp5teXy', 0, 'L', NULL);
 
 --
 -- Indexes for dumped tables
@@ -266,7 +251,7 @@ ALTER TABLE `asuransi`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `ID_Barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID_Barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -290,7 +275,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
