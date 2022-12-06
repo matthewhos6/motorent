@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `motorentfai`
 --
-CREATE DATABASE IF NOT EXISTS `motorentfai` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `motorentfai`;
+CREATE DATABASE IF NOT EXISTS `k1motorent_motorent` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `k1motorent_motorent`;
 
 -- --------------------------------------------------------
 
