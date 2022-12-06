@@ -227,15 +227,21 @@ class MasterAdminController extends Controller
     }
 
     public function menambahbarang(Request $request){
-        $namaFilePhoto = "";
+        $nameFilePhoto = "";
         if ($request->file("photo") != null) {
-            $namaFolderPhoto = "";
-            foreach ($request->file("photo") as $photo) {
-                $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
+            
+            $nameFilePhoto  = Str::random(8);
+            // dd(count($request->file("photo")));
+            for ($i=0; $i < count($request->file("photo")); $i++) { 
+                # code...
+                // dd($i);
+                $namaFilePhoto  = $nameFilePhoto."-".$i.".jpg";
                 $namaFolderPhoto = "photo/";
     
-                $photo->move(public_path($namaFolderPhoto),$namaFilePhoto); // masuk ke folder public/photo
+                $request->file("photo")[$i]->move(public_path($namaFolderPhoto),$namaFilePhoto); // masuk ke folder public/photo
             }
+            // foreach ($request->file("photo") as $photo) {
+            // }
         }
         DB::table('barang')->insert(
             [
@@ -250,7 +256,8 @@ class MasterAdminController extends Controller
                 'No_BPKB' => $request->bpkb,
                 'No_STNK' => $request->stnk,
                 'Status' => 1,
-                'gambar' => $namaFilePhoto
+                'gambar' => $nameFilePhoto,
+                'jumlah_gambar' => count($request->file("photo"))
             ]
         );
         return redirect()->route('barang')->with('msg', 'Berhasil tambah motor '.$request->nama);
