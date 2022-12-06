@@ -12,30 +12,20 @@
 table, th, td {
   border:1px solid black;
 }
+body{
+    background: linear-gradient(rgba(229, 231, 255, 0.9), rgba(229, 231, 255, 0.9)), url({{asset('pic/motor-wallpaper.jpg')}});
+}
 </style>
-    <body><div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Motorent</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <form action="{{ url("/admin/logout") }}" method="post">
-                            @csrf
-                            <button value="1" name="btnLogout" type="submit" class="btn btn-danger">Logout</button> 
-                            <button value="1" name="btnListBarang" type="submit" class="btn btn-primary">Master Barang</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+    <body>
     <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-black mb-3">Welcome, {{Session::get('loguser')}}</h1>
+        <div class="row">
+            <div class="col-10">
+                <h1 class="display-3 text-uppercase text-black mb-3 ms-5 mt-3">Welcome, {{Session::get('loguser')}}</h1>
+            </div>
+            <div class="col-2">
+                <a href="{{url('/admin/logout')}}" class="btn btn-danger mt-5">Logout</a>
+            </div>
+        </div>
     </div>
     @if (Session::has('msg'))
     <div style="background-color: rgb(51, 255, 0); padding: 4px; color: white">
@@ -64,13 +54,24 @@ table, th, td {
         <div class="container">
         <form action="{{ url("/admin/searchbarang") }}" method="post">
             @csrf
-            Model : <input value="{{$searched}}" type="text" name="cari" size="50px"> <button name="btnSearch" type="submit" class="btn btn-info">Search</button></form> <br>
+            <div class="row">
+                <div class="col-1">
+                    <label style="font-size: 20px">Model : </label> 
+                </div>
+                <div class="col-5">
+                    <input class="form-control" value="{{$searched}}" type="text" name="cari" size="50px">
+                </div>
+                <div class="col-2">
+                    <button name="btnSearch" type="submit" class="btn btn-info">Search</button>
+                </div>
+            </div>
+        </form> <br>
             {{-- Model : <input value="{{Session::get('caribarang')}}" type="text" name="cari" size="50px"> <button name="btnSearch" type="submit" class="btn btn-info">Search</button></form> <br> --}}
         <form action="{{ url("/admin/tambahbarang") }}" method="post">
             @csrf
         <button name="btnMaster" type="submit" class="btn btn-success">Tambah Barang</button>
         </form><br><br>
-                <table style="width:100%;">
+                <table class="table table-primary table-striped mt-3">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -93,7 +94,7 @@ table, th, td {
                                 <td>{{$value->Nama_Motor}}</td>
                                 <td>{{$value->Warna_Motor}}</td>
                                 <td>{{$value->Isi_Silinder}}cc</td>
-                                <td>{{$value->Plat}}</td>
+                                <td>{{strtoupper($value->Plat)}}</td>
                                 <td>{{$value->Tahun_Pembuatan}}</td>
                                 @if ($value->gambar == null)
                                     <td>Belum input gambar</td>

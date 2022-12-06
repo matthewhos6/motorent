@@ -86,27 +86,15 @@ class MasterAdminController extends Controller
     }
 
     public function logout(Request $request){
-        if ($request->btnLogout == 1) {
-            Session::forget('logid');
-            Session::forget('loguser');
-            Session::forget('filtertrans');
-            Session::forget('filterreport');
-            Session::forget('startDate');
-            Session::forget('endDate');
-            Session::forget('caribarang');
-            Session::forget('admin');
-            return redirect(url("/admin/login"));
-        }
-        if ($request->btnReport == 1) {
-            return redirect(url("/admin/manager"));
-        }
-        if ($request->btnListKaryawan == 1) {
-            Session::forget('carikaryawan');
-            return redirect(url("/admin/listkaryawan"));
-        }
-        if ($request->btnListBarang == 1) {
-            return redirect(url("/admin/gudang"));
-        }
+        Session::forget('logid');
+        Session::forget('loguser');
+        Session::forget('filtertrans');
+        Session::forget('filterreport');
+        Session::forget('startDate');
+        Session::forget('endDate');
+        Session::forget('caribarang');
+        Session::forget('admin');
+        return redirect(url("/admin/login"));
     }
 
     public function searchkaryawan(Request $request){

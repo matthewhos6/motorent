@@ -12,31 +12,32 @@
 table, th, td {
   border:1px solid black;
 }
+body{
+    background: linear-gradient(rgba(229, 231, 255, 0.9), rgba(229, 231, 255, 0.9)), url({{asset('pic/motor-wallpaper.jpg')}});
+}
 </style>
-<body><div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Motorent</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <form action="{{ url("/admin/logout") }}" method="post">
-                            @csrf
-                            <button value="1" name="btnLogout" type="submit" class="btn btn-danger">Logout</button> 
-                            <button value="1" name="btnReport" type="submit" class="btn btn-info">Report Page</button>
-                            <button value="1" name="btnListKaryawan" type="submit" class="btn btn-primary">Master Karyawan</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="btn" href="{{url('/admin/manager')}}" style="font-size: 20px">Report Page</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn" href="{{url('/admin/listkaryawan')}}" style="font-size: 20px">Master Karyawan</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="btn" href="{{url('/admin/logout')}}" style="font-size: 20px">Logout</a>
+                    </li>
+                  </ul>
+            </div>
         </div>
-    </div>
+    </nav>
     <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase mb-3">Welcome, {{Session::get('loguser')}}</h1>
+        <h1 class="display-3 text-uppercase mb-3 ms-5">Welcome, {{Session::get('loguser')}}</h1>
     </div>
 
     <form action="{{ url("/admin/searchkaryawan") }}" method="post">
@@ -49,7 +50,7 @@ table, th, td {
             <button name="btnMaster" type="submit" class="btn btn-success">Tambah Karyawan</button> <br><br> </form>
         <div class="row">
             <div>
-                <table style="width:100%;">
+                <table class="table table-success table-striped mt-3">
                     <thead>
                         <tr>
                             <th>ID</th>

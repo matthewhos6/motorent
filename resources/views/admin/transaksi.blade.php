@@ -11,18 +11,20 @@
 table, th, td {
   border:1px solid black;
 }
+body{
+    background: linear-gradient(rgba(229, 231, 255, 0.9), rgba(229, 231, 255, 0.9)), url({{asset('pic/motor-wallpaper.jpg')}});
+}
 
 </style>
 <body>
-    <br><br>
-    <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase mb-3">Welcome, {{Session::get('loguser')}}</h1>
-        <form action="{{ url("/admin/logout") }}" method="post">
-            @csrf
-            <span><button value="1" name="btnLogout" type="submit" class="btn btn-danger">Logout</button> 
-        </form>
+    <div class="row ms-5 mt-5">
+        <div class="col-10">
+            <h1 class="display-3 text-uppercase mb-5">Welcome, {{Session::get('loguser')}}</h1>
+        </div>
+        <div class="col-2">
+            <a href="{{url('/admin/logout')}}" class="btn btn-danger">Logout</a>
+        </div>
     </div>
-    <br>
 
     @php
         $listTrans = DB::table('transaksi')->get();
@@ -31,20 +33,31 @@ table, th, td {
         $listBarang = DB::table('barang')->get();
         $filter = Session::get('filtertrans');
     @endphp
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 mt-5">
         <div class="container pt-5 pb-3">
             <div class="row" style="margin-top: -170px;">
     <form action="{{url('admin/filtertrans' )}}" method="post">
         @csrf
         <span><h2>Transaksi</h2>
-        <input id="filter1" type="radio" id="filter" name="filter" value="All"> Show All
-        <input id="filter2" type="radio" id="filter" name="filter" value="Accepted" style="margin-left: 20px"> Accepted
-        <input id="filter3" type="radio" id="filter" name="filter" value="Rejected" style="margin-left: 20px"> Rejected </span>
-        <input id="filter4" type="radio" id="filter" name="filter" value="Pending" style="margin-left: 20px"> Pending </span><br>
-        <br><button align="right" name="btnFilter" type="submit" class="btn btn-success">Apply</button> <br> 
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-10">
+                        <input id="filter1" type="radio" id="filter" name="filter" value="All"> Show All
+                        <input id="filter2" type="radio" id="filter" name="filter" value="Accepted" style="margin-left: 20px"> Accepted
+                        <input id="filter3" type="radio" id="filter" name="filter" value="Rejected" style="margin-left: 20px"> Rejected </span>
+                        <input id="filter4" type="radio" id="filter" name="filter" value="Pending" style="margin-left: 20px"> Pending </span><br>
+                    </div>
+                    <div class="col-2">
+                        <button align="right" name="btnFilter" type="submit" class="btn btn-success">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6"></div>
+        </div>
     </form>
     
-    <table style="width:100%; margin-top:20px ; color:black;">
+    <table class="table table-success table-striped mt-3">
                     <thead>
                         <tr>
                             <th>ID</th>

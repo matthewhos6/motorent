@@ -54,7 +54,7 @@ Route::middleware('isadmin')->group(function () {
         Route::GET("/searchbarang/{nama}", [MasterAdminController::class, "getsearchbarang"]);
         Route::POST("/tambahbarang", [MasterAdminController::class, "tambahbarang"]);
         Route::POST("/menambahbarang", [MasterAdminController::class, "menambahbarang"]);
-        Route::POST("/logout", [MasterAdminController::class, "logout"]);
+        Route::GET("/logout", [MasterAdminController::class, "logout"]);
 
         Route::get('/transaksi', function () {
             return view('admin.transaksi');

@@ -12,55 +12,108 @@
 table, th, td {
   border:1px solid black;
 }
+body{
+    background: linear-gradient(rgba(229, 231, 255, 0.9), rgba(229, 231, 255, 0.9)), url({{asset('pic/motor-wallpaper.jpg')}});
+}
 </style>
 <body>
-        <div class="container-fluid position-relative nav-bar p-0">
-                <div class="position-relative px-lg-5" style="z-index: 9;">
-                    <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                        <a href="" class="navbar-brand">
-                            <h1 class="text-uppercase text-primary mb-1">Motorent</h1>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                            <div class="navbar-nav ml-auto py-0">
-                                <form action="{{ url("/admin/logout") }}" method="post">
-                                    @csrf
-                                    <button value="1" name="btnLogout" type="submit" class="btn btn-danger">Logout</button> 
-                                    <button value="1" name="btnListBarang" type="submit" class="btn btn-primary">Back</button>
-                                </form>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-    <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">Welcome, {{Session::get('loguser')}}</h1>
-    </div>
-    
-    <div class="container" style="margin-left: 40%;">
-        <div class="row">
-            <div class="col-4">
-            <h3>Tambah Barang</h3>
-            <form action="{{ url("/admin/menambahbarang") }}" method="POST" enctype="multipart/form-data">
+    <div style="display:flex;justify-content: center;align-items: center;">
+        <div class="container" style="background-color: white; width:700px;height:990px;text-align:center;box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);margin: 2rem auto 2rem auto;">
+            <label style="font-size: 40px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; margin-top:10px;">Tambah Barang</label>
+            <form action="{{ url("/admin/menambahbarang") }}" enctype="multipart/form-data" method="POST">
                 @csrf
-                <br>Nama : <input type="text" name="nama" required><br>
-                <br>Warna : <input type="text" name="warna" required><br>
-                <br>Silinder : <input type="number" name="silinder" required><br>
-                <br>Harga Sewa : <input type="number" name="harga" required><br>
-                <br>Plat : <input type="text" name="plat" required><br>
-                <br>Tahun Produksi : <input type="date" name="tahun" required><br>
-                <br>No Rangka : <input type="text" name="rangka" required><br>
-                <br>No Mesin : <input type="text" name="mesin" required><br>
-                <br>No BPKB : <input type="text" name="bpkb" required><br>
-                <br>No STNK : <input type="text" name="stnk" required><br>
-                Gambar : <input type="file" name="photo[]"> <br>
-                <button name="btnTambah" type="submit" class="btn btn-success">Tambah</button><br><br>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nama :</label>
+                    </div>
+                    <div class="col-5">
+                        <input type="text" name="nama" required class="form-control mt-4">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Warna :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="text" name="warna" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Silinder :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="number" name="silinder" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Harga Sewa :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="number" name="harga" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Plat Nomor :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="text" name="plat" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Tahun Produksi :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="date" name="tahun" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nomor Rangka :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="text" name="rangka" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nomor Mesin :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="text" name="mesin" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nomor BPKB :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="text" name="bpkb" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nomor STNK :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="text" name="stnk" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-5 ps-5" style="text-align: right">
+                        <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Gambar :</label>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control mt-4" type="file" name="photo[]">
+                    </div>
+                </div>
+                <button name="btnTambah" type="submit" class="btn btn-primary mt-5" style="width: 600px">Tambah Barang</button>
             </form>
-            </div>
+            <a href="{{url('/admin/gudang')}}" class="btn btn-link">Back to List Barang</a>
         </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

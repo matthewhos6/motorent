@@ -12,32 +12,30 @@
 table, th, td {
   border:1px solid black;
 }
+body{
+    background: linear-gradient(rgba(229, 231, 255, 0.9), rgba(229, 231, 255, 0.9)), url({{asset('pic/motor-wallpaper.jpg')}});
+}
 </style>
 <body>
-<div class="container-fluid position-relative nav-bar p-0">
-        <div class="position-relative px-lg-5" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Motorent</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <form action="{{ url("/admin/logout") }}" method="post">
-                            @csrf
-                            <button value="1" name="btnLogout" type="submit" class="btn btn-danger">Logout</button> 
-                            <button value="1" name="btnListKaryawan" type="submit" class="btn btn-warning">Back</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="btn" href="{{url('/admin/manager')}}" style="font-size: 20px">Report Page</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn" href="{{url('/admin/listkaryawan')}}" style="font-size: 20px">Master Karyawan</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="btn" href="{{url('/admin/logout')}}" style="font-size: 20px">Logout</a>
+                    </li>
+                  </ul>
+            </div>
         </div>
-    </div>
-    <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase mb-3">Welcome, {{Session::get('loguser')}}</h1>
-    </div>
+    </nav>
     @if (Session::has('msg'))
     <div style="background-color: rgb(51, 255, 0); padding: 4px; color: white">
         <h3>
@@ -45,25 +43,72 @@ table, th, td {
         </h3>
     </div>
   @endif
-    <div class="container">
+  <div style="display:flex;justify-content: center;align-items: center;">
+    <div class="container" style="background-color: white; width:700px;height:700px;text-align:center;box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);margin: 2rem auto 2rem auto;">
+        <label style="font-size: 40px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; margin-top:10px;">Add Karyawan</label>
+        <form action="{{ url("/admin/menambahkaryawan") }}" enctype="multipart/form-data" method="POST">
+            @csrf
+            <div class="row mt-2">
+                <div class="col-5 ps-5" style="text-align: right">
+                    <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nama :</label>
+                </div>
+                <div class="col-5">
+                    <input type="text" name="nama" required minlength="3" class="form-control mt-4">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-5 ps-5" style="text-align: right">
+                    <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Nomor Telepon :</label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control mt-4" type="number" name="noTelp" required minlength="10">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-5 ps-5" style="text-align: right">
+                    <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Username :</label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control mt-4" type="text" name="username" required minlength="3">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-5 ps-5" style="text-align: right">
+                    <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Password :</label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control mt-4" type="password" name="password" required minlength="5">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-5 ps-5" style="text-align: right">
+                    <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Jabatan :</label>
+                </div>
+                <div class="col-5">
+                    <select class="form-control mt-4" name="jabatan" id="">
+                        <option value='0'>Transaksi</option>
+                        <option value='1'>Gudang</option>
+                        <option value='2'>Manager</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-5 ps-5" style="text-align: right">
+                    <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">KTP :</label>
+                </div>
+                <div class="col-5">
+                    <input class="form-control mt-4" type="file" name="photo[]">
+                </div>
+            </div>
+            <button name="btnTambah" type="submit" class="btn btn-primary mt-5" style="width: 600px">Tambah Karyawan</button>
+        </form>
+        <a href="{{url('/admin/listkaryawan')}}" class="btn btn-link">Back to List Karyawan</a>
+    </div>
+  </div>
+    <div class="container mt-5">
         <div class="row">
             <div class="col-4" style="margin-left: 31%;">
-                <form action="{{ url("/admin/menambahkaryawan") }}" enctype="multipart/form-data" method="POST">
-                    @csrf
-                <span><h2 id="titel">Add Karyawan </h2><br>
-                Nama : <input type="text" name="nama" required minlength="3"><br><br>
-                Nomor Telepon : <input type="number" name="noTelp" required minlength="10"><br><br>
-                Username : <input type="text" name="username" required minlength="3"><br><br>
-                Password : <input type="password" name="password" required minlength="5"><br><br>
-                Jabatan : <select name="jabatan" id="">
-                            <option value='0'>Transaksi</option>
-                            <option value='1'>Gudang</option>
-                            <option value='2'>Manager</option>
-                        </select><br>
-                KTP : <input type="file" name="photo[]">
-                <br>
-                <button name="btnTambah" type="submit" class="btn btn-success">Tambah Karyawan</button>
-            </form>
+                
             </div>
         </div>
     </div><br>
