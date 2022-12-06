@@ -46,6 +46,7 @@ Route::middleware('isadmin')->group(function () {
         Route::POST("/filterreport", [MasterAdminController::class, "filterreport"]);
         Route::POST("/searchkaryawan", [MasterAdminController::class, "searchkaryawan"]);
         Route::POST("/tambahkaryawan", [MasterAdminController::class, "tambahkaryawan"]);
+        Route::GET("/tambahkaryawan", [MasterAdminController::class, "tambahkaryawan"])->name('tambahkaryawan');
         Route::POST("/menambahkaryawan", [MasterAdminController::class, "menambahkaryawan"]);
         Route::POST("/detailbarang", [MasterAdminController::class, "detailbarang"]);
         Route::POST("/actionbarang", [MasterAdminController::class, "actionbarang"]);
@@ -61,7 +62,7 @@ Route::middleware('isadmin')->group(function () {
         Route::get('/gudang', function () {
             $searched = null;
             return view('admin.gudang', compact("searched"));
-        });
+        })->name('barang');
         Route::get('/manager', function () {
             return view('admin.manager');
         });

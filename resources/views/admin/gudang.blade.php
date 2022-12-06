@@ -37,6 +37,13 @@ table, th, td {
     <div class="container-fluid page-header">
         <h1 class="display-3 text-uppercase text-black mb-3">Welcome, {{Session::get('loguser')}}</h1>
     </div>
+    @if (Session::has('msg'))
+    <div style="background-color: rgb(51, 255, 0); padding: 4px; color: white">
+        <h3>
+            {{ Session::get('msg'); }}
+        </h3>
+    </div>
+    @endif
     @php
         // $listBarang = DB::table('barang')->get();
         // if (Session::get('caribarang') != null) {

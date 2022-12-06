@@ -153,7 +153,8 @@ class MasterAdminController extends Controller
                 ]
             );
         }
-        return view('admin.masterkaryawan');
+        return redirect()->route('tambahkaryawan')->with('msg', 'Karyawan '.$request->nama.' ditambah!');
+        
     }
 
     public function detailbarang(Request $request){
@@ -189,6 +190,7 @@ class MasterAdminController extends Controller
                     'Status' => $request->status,
                     'gambar' => $namaFilePhoto
                 ]);
+                return redirect()->route('barang')->with('msg', 'Berhasil update motor '.$request->nama);
             }
             else {
                 DB::table('barang')->where('ID_Barang', $request->btnEditBarang)->update([
@@ -204,15 +206,17 @@ class MasterAdminController extends Controller
                     'No_STNK' => $request->stnk,
                     'Status' => $request->status
                 ]);
+                return redirect()->route('barang')->with('msg', 'Berhasil update motor '.$request->nama);
             }
         }else if ($request->btnDeleteBarang != null) {
             DB::delete('delete from barang where ID_Barang = ?',
             [
                 $request->btnDeleteBarang
             ]);
+            return redirect()->route('barang')->with('msg', 'Berhasil hapus motor '.$request->nama);
         }
         Session::forget('caribarang');
-        return redirect(url("/admin/gudang"));
+        // return redirect(url("/admin/gudang"));
     }
 
     public function searchbarang(Request $request){
@@ -261,8 +265,7 @@ class MasterAdminController extends Controller
                 'gambar' => $namaFilePhoto
             ]
         );
-        $searched = null;
-        return view('admin.gudang', compact("searched"));
+        return redirect()->route('barang')->with('msg', 'Berhasil tambah motor '.$request->nama);
     }
 
 }
