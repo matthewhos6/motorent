@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class logregcontroller extends Controller
 {
+    //login register user
     public function login(Request $req){
         $req->validate([
             'username' => 'required',
