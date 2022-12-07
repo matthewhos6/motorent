@@ -21,7 +21,7 @@
           <div style="color: red;">{{ Session::get('msg'); }}</div>
       @endif
       <button style="width: 93%;" type="submit" class="btn btn-primary">Login</button><br><br>
-      <a href="/">Back to Home</a>
+      <a href="{{ url("/") }}">Back to Home</a>
 
   </div></center>
   </form>
