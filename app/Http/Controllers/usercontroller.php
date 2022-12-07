@@ -95,7 +95,7 @@ class usercontroller extends Controller
         $new->status = 0;
         $new->save();
 
-        $barang->status = 0;
+        $barang->Status = 0; 
         $barang->save();
         return redirect()->to(route('home_user'));
 
