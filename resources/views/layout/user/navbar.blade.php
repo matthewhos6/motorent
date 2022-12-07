@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{url('/user')}}/user">MotoRent</a>
+      <a class="navbar-brand" href="{{url('/user')}}">MotoRent</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav nav-pills">
             <li class="nav-item">
