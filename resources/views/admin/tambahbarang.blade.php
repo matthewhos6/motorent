@@ -107,7 +107,7 @@ body{
                         <label class="mt-4" style="font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Gambar :</label>
                     </div>
                     <div class="col-5">
-                        <input class="form-control mt-4" type="file" name="photo[]">
+                        <input class="form-control mt-4" type="file" name="photo[]" multiple>
                     </div>
                 </div>
                 <button name="btnTambah" type="submit" class="btn btn-primary mt-5" style="width: 600px">Tambah Barang</button>

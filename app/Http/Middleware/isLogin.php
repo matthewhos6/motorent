@@ -17,10 +17,11 @@ class isLogin
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd("awok");
         if (Session::has('login')) {
             return $next($request);
         }else{
-            return redirect()->to(route('login'))->with('err','anda belum login');
+            return redirect('/login')->with('err','anda belum login');
         }
     }
 }

@@ -55,15 +55,14 @@
         <div class="col">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
                 <div class="carousel-inner">
+                @for ($i = 0; $i < $barang->jumlah_gambar; $i++)
                   <div class="carousel-item active">
-                    <img src="..." class="d-block w-100" alt="...">
+                    @php
+                    $str = (explode("-",$barang->gambar));
+                  @endphp 
+                    <img src="{{ asset("photo/".$str[0]."-".$i.".jpg") }}" class="d-block w-100" alt="...">
                   </div>
-                  <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                  </div>
+                @endfor
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
