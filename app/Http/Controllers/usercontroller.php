@@ -96,13 +96,10 @@ class usercontroller extends Controller
         $new->status = 0;
         $new->save();
 
-<<<<<<< HEAD
         DB::table('barang')->where('ID_Barang','=',$id)->update(['status','=',0]);
 
-=======
-        $barang->Status = 0; 
+        $barang->Status = 0;
         $barang->save();
->>>>>>> fba7b6ce723bce917d3dd1b4ff9feadf30faade7
         return redirect()->to(route('home_user'));
 
 
