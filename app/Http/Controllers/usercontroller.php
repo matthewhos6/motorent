@@ -93,7 +93,7 @@ class usercontroller extends Controller
         $new-> End_Date = $end;
         $new->status = 0;
         $new->save();
-
+        return redirect()->to(route('home_user'));
 
     }
 }
