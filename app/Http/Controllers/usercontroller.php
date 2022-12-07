@@ -81,6 +81,7 @@ class usercontroller extends Controller
         $user = User::where('username','=',Session::get('login'))->first();
         $data = json_decode($request->json);
         $barang = barang::find($id);
+        dd($barang);
         $start = Carbon::now();
         $end = Carbon::now()->addDay(Session::get('hari'));
 
