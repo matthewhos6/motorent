@@ -153,13 +153,19 @@ class MasterAdminController extends Controller
     public function actionbarang(Request $request){
         $namaFilePhoto = "";
         if ($request->file("photo") != null) {
-            $namaFolderPhoto = "";
-            foreach ($request->file("photo") as $photo) {
-                $namaFilePhoto  = Str::random(8).".".$photo->getClientOriginalExtension();
+            
+            $nameFilePhoto  = Str::random(8);
+            // dd(count($request->file("photo")));
+            for ($i=0; $i < count($request->file("photo")); $i++) { 
+                # code...
+                // dd($i);
+                $namaFilePhoto  = $nameFilePhoto."-".$i.".jpg";
                 $namaFolderPhoto = "photo/";
     
-                $photo->move(public_path($namaFolderPhoto),$namaFilePhoto); // masuk ke folder public/photo
+                $request->file("photo")[$i]->move(public_path($namaFolderPhoto),$namaFilePhoto); // masuk ke folder public/photo
             }
+            // foreach ($request->file("photo") as $photo) {
+            // }
         }
         if ($request->btnEditBarang != null) {
             //tak buat pengecekan biar klo admin ga update gambar, gambar ga akan kerubah/null

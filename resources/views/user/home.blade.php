@@ -13,7 +13,10 @@
         @foreach($listbarang as $value)
 
         <div class="card border border-5 p-3 rounded rounded04" style="width: 18rem; margin-left: 20px; margin-top: 50px;">
-            <img width="300px" height="300px" src="{{ asset("photo/".$value->gambar."-0.jpg") }}" class="card-img-top">
+            @php
+            $str = (explode("-",$value->gambar));
+            @endphp 
+            <img width="300px" height="300px" src="{{ asset("photo/".$str[0]."-0.jpg") }}" class="card-img-top">
             <div class="card-body">
                 <h4 class="card-title fw-bold">{{$value->Nama_Motor}}, {{$value->Warna_Motor}}</h4>
                 <div class="card-text" style="height: 230px;">

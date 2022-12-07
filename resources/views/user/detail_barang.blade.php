@@ -57,7 +57,10 @@
                 <div class="carousel-inner">
                 @for ($i = 0; $i < $barang->jumlah_gambar; $i++)
                   <div class="carousel-item active">
-                    <img src="{{ asset("photo/".$barang->gambar."-".$i.".jpg") }}" class="d-block w-100" alt="...">
+                    @php
+                    $str = (explode("-",$barang->gambar));
+                  @endphp 
+                    <img src="{{ asset("photo/".$str[0]."-".$i.".jpg") }}" class="d-block w-100" alt="...">
                   </div>
                 @endfor
                 </div>

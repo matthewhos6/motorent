@@ -99,7 +99,10 @@ body{
                                 @if ($value->gambar == null)
                                     <td>Belum input gambar</td>
                                 @else
-                                <td> <img src="{{ asset("photo/".$value->gambar) }}" style="margin: 10px;width:150px;height:150px;"></td>
+                                @php
+                                    $str = (explode("-",$value->gambar));
+                                @endphp 
+                                <td> <img src="{{ asset("photo/".$str[0]."-0.jpg") }}" style="margin: 10px;width:150px;height:150px;"></td>
                                 @endif
                                 <td>Rp <?= number_format($value->Harga_sewa,2,",",".") ?>/ hari</td>
                                 <td><button name="btnDetailBarang" value="{{$value->ID_Barang}}" type="submit" class="btn btn-warning">Detail</button></td>
