@@ -13,7 +13,7 @@ class usercontroller extends Controller
 {
     public function home()
     {
-        $barang = barang::all();
+        $barang = barang::where('Status','=',0);
         $user = User::where('username','=',Session::get('login'))->first();
         return view('user.home',[
             'user' => $user,
