@@ -98,8 +98,6 @@ class usercontroller extends Controller
 
         DB::table('barang')->where('ID_Barang','=',$id)->update(['status','=',0]);
 
-        $barang->Status = 0;
-        $barang->save();
         return redirect()->to(route('home_user'));
 
 
