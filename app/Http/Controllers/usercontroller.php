@@ -14,7 +14,8 @@ class usercontroller extends Controller
 {
     public function home()
     {
-        $barang = barang::where('Status','=',0);
+        $barang = barang::where('Status','=',1)->get();
+        // dd($barang);
         $user = User::where('username','=',Session::get('login'))->first();
         return view('user.home',[
             'user' => $user,
@@ -95,8 +96,13 @@ class usercontroller extends Controller
         $new->status = 0;
         $new->save();
 
+<<<<<<< HEAD
         DB::table('barang')->where('ID_Barang','=',$id)->update(['status','=',0]);
 
+=======
+        $barang->Status = 0; 
+        $barang->save();
+>>>>>>> fba7b6ce723bce917d3dd1b4ff9feadf30faade7
         return redirect()->to(route('home_user'));
 
 
