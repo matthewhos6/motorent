@@ -61,6 +61,7 @@ class usercontroller extends Controller
                 'gross_amount' => Session::get('harga'),
             ),
             'customer_details' => array(
+
                 'first_name' => $user->fullname,
                 'email' => $user->Email,
                 'phone' =>$user->Telepon,
@@ -93,6 +94,6 @@ class usercontroller extends Controller
         $new->status = 0;
         $new->save();
 
-        return redirect()->to(route('home_user'));
+
     }
 }
