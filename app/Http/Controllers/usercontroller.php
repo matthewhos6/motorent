@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class usercontroller extends Controller
 {
@@ -96,8 +97,8 @@ class usercontroller extends Controller
         $new->status = 0;
         $new->save();
 
-        $barang->Status = 0; 
-        $barang->save();
+        DB::table('barang')->where('ID_Barang','=',$id)->update(['status'=> 0]);
+
         return redirect()->to(route('home_user'));
 
 
