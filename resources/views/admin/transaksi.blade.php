@@ -116,6 +116,7 @@ body{
                                 <td>{{$barangnya}}</td>
                                 <td>{{$stnk}}</td>
                                 <td>Rp {{number_format($value->Total,2,",",".")}}</td>
+                                <td>
                                     @if ($value->Status != 0)
                                         @if ($value->Status == 1)
                                             <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
