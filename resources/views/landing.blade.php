@@ -33,7 +33,7 @@
             color: #497fbd;
 
         }
-        /* home page user */
+        /* user pages */
         </style>
     </head>
     <body>
