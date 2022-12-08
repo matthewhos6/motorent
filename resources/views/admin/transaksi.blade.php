@@ -67,7 +67,7 @@ body{
                             <th>Barang</th>
                             <th>No STNK</th>
                             <th>Total</th>                  
-                            {{-- <th>Bukti bayar</th> --}}
+                            <th>Bukti bayar</th>
                             <th>Action/Status</th>
                         </tr>
                     </thead>
@@ -116,6 +116,11 @@ body{
                                 <td>{{$barangnya}}</td>
                                 <td>{{$stnk}}</td>
                                 <td>Rp {{number_format($value->Total,2,",",".")}}</td>
+                                @if ($value->Bukti_Bayar != null)
+                                    <td><img src="assets/bukti/'.{{$value->Bukti_Bayar}}.'" style="width: 200px;height: 200px;"></td>
+                                @else
+                                    <td>Belum ada bukti bayar!</td>
+                                @endif
                                 <td>
                                     @if ($value->Status != 0)
                                         @if ($value->Status == 1)
