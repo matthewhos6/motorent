@@ -182,7 +182,8 @@ class MasterAdminController extends Controller
                     'No_BPKB' => $request->bpkb,
                     'No_STNK' => $request->stnk,
                     'Status' => $request->status,
-                    'gambar' => $namaFilePhoto
+                    'gambar' => $namaFilePhoto,
+                   'jumlah_gambar' => count($request->file("photo"))
                 ]);
                 return redirect()->route('barang')->with('msg', 'Berhasil update motor '.$request->nama);
             }
@@ -198,7 +199,8 @@ class MasterAdminController extends Controller
                     'No_Mesin' => $request->mesin,
                     'No_BPKB' => $request->bpkb,
                     'No_STNK' => $request->stnk,
-                    'Status' => $request->status
+                    'Status' => $request->status,
+                    'jumlah_gambar' => count($request->file("photo"))
                 ]);
                 return redirect()->route('barang')->with('msg', 'Berhasil update motor '.$request->nama);
             }
