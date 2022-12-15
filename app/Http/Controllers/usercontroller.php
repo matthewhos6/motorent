@@ -16,7 +16,7 @@ class usercontroller extends Controller
     {
         $barang = barang::where('Status','=',1)->get();
         // dd($barang);
-        $user = User::where('username','=',Session::get('login'))->first();
+        $user = user::where('username','=',Session::get('login'))->first();
         return view('user.home',[
             'user' => $user,
             'listbarang' => $barang
