@@ -17,7 +17,7 @@ class usercontroller extends Controller
     {
         $barang = barang::where('Status','=',1)->get();
         // dd($barang);
-        $user = user::where('username','=',strval(Session::get('login')))->first();
+        $user = DB::select("SELECT * FROM user WHERE username = ? limit 1",[Session::get("login")]);
         return view('user.home',[
             'user' => $user,
             'listbarang' => $barang

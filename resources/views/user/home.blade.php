@@ -2,9 +2,11 @@
 @section('title','Home')
 @section('profile','active')
 @section('content')
-
+@php
+    // dd($user); 
+@endphp
 <div class="container-fluid page-header">
-    <h3 class="text-uppercase text-white m-0">Hai , {{ucfirst($user->Username)}}!</h3>
+    <h3 class="text-uppercase text-white m-0">Hai , {{$user[0]->Username}}!</h3>
     <h1 class="display-3 text-uppercase text-white mb-3">Find Your Motorcycle</h1>
 </div>
 
