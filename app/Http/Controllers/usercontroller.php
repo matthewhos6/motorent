@@ -23,13 +23,13 @@ class usercontroller extends Controller
             'listbarang' => $barang
         ]);
     }
-
+    
     public function profil()
     {
-        $user = User::where('username','=',Session::get('login'))->first();
-        dd($user);
+        $user = DB::select("SELECT * FROM user WHERE username = ? limit 1",[Session::get("login")]);
+        // dd($user[0]);
         return view('user.profil',[
-            'user' => $user
+            'user' => $user[0]
         ]);
     }
 
