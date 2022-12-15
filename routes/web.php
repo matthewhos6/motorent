@@ -78,9 +78,12 @@ Route::middleware('islogin')->group(function () {
         Route::get("/", [usercontroller::class, "home"])->name('home_user');
         Route::get("/profil", [usercontroller::class, "profil"])->name('profil_user');
         Route::get("/barang/{id}", [usercontroller::class, "detailbarang"]);
-
+        Route::get('/history', function () {
+            return view('user.history');
+        });
+        
         Route::get("/barang/{id}/konfirmasi", [usercontroller::class, "konfirmasi"])->name('konfirmasi');
-
+        
         Route::post("/barang/{id}", [usercontroller::class, "passing"]);
         Route::post("/barang/{id}/konfirmasi", [usercontroller::class, "cout"]);
     });

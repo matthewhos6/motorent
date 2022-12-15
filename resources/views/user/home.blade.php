@@ -1,6 +1,6 @@
 @extends('layout.user.master')
 @section('title','Home')
-@section('home','active')
+@section('profile','active')
 @section('content')
 
 <div class="container-fluid page-header">
