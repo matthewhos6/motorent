@@ -1,6 +1,6 @@
 @extends('layout.user.master')
 @section('title','Home')
-@section('profile','active')
+{{-- @section('profile','active') --}}
 @section('content')
 @php
     // dd($user); 
