@@ -27,6 +27,7 @@ class usercontroller extends Controller
     public function profil()
     {
         $user = User::where('username','=',Session::get('login'))->first();
+        dd($user);
         return view('user.profil',[
             'user' => $user
         ]);
