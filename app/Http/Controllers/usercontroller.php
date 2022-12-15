@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Nette\Utils\Strings;
 
 class usercontroller extends Controller
 {
@@ -16,7 +17,7 @@ class usercontroller extends Controller
     {
         $barang = barang::where('Status','=',1)->get();
         // dd($barang);
-        $user = user::where('username','=',Session::get('login'))->first();
+        $user = user::where('username','=',strval(Session::get('login')))->first();
         return view('user.home',[
             'user' => $user,
             'listbarang' => $barang
