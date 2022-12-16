@@ -188,6 +188,13 @@ class MasterAdminController extends Controller
                 return redirect()->route('barang')->with('msg', 'Berhasil update motor '.$request->nama);
             }
             else {
+                $listBarang = DB::table('barang')->get();
+                $jumlah = 0;
+                foreach ($listBarang as $value) {
+                    if ($value->ID_Barang == $request->btnEditBarang) {
+                        $jumlah = $value->jumlah_gambar;
+                    };
+                }
                 DB::table('barang')->where('ID_Barang', $request->btnEditBarang)->update([
                     'Nama_Motor' => $request->nama,
                     'Warna_Motor' => $request->warna,
@@ -200,7 +207,7 @@ class MasterAdminController extends Controller
                     'No_BPKB' => $request->bpkb,
                     'No_STNK' => $request->stnk,
                     'Status' => $request->status,
-                    'jumlah_gambar' => count($request->file("photo"))
+                    'jumlah_gambar' => $jumlah
                 ]);
                 return redirect()->route('barang')->with('msg', 'Berhasil update motor '.$request->nama);
             }

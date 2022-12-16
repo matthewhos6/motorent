@@ -21,7 +21,8 @@
             <th>No STNK</th>
             <th>Total</th>                  
             {{-- <th>Bukti bayar</th> --}}
-            <th>Action/Status</th>
+            <th>Status</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -70,7 +71,7 @@
                 <td>Rp {{number_format($value->Total,2,",",".")}}</td>
                 <td>
                     @if ($value->Status != 0)
-                        @if ($value->Status == 1)
+                        @if ($value->Status == 1 || $value->Status == 2)
                             <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
                         @else
                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}
@@ -79,7 +80,15 @@
                         <p style="color: darkorchid">Pending</p>
                     @endif
                 </td>
-            </tr>
+                <td>
+                    @if ($value->Status == 2)
+                        <p style='color: green;'>Returned</p>
+                    @else
+                        <form action="{{url('user/returned/'.$value->ID_Trans )}}" method="post">
+                            @csrf
+                            <button name="btnReturn" value="{{$value->FK_ID_Barang}}" type="submit" class="btn btn-success">Return</button>
+                        </form>
+                    @endif
                 </td>
             </tr>
         

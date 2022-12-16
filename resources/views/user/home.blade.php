@@ -14,14 +14,14 @@
     <div class="row" id="content">
         @foreach($listbarang as $value)
 
-        <div class="card border border-5 p-3 rounded rounded04" style="width: 18rem; margin-left: 20px; margin-top: 50px;">
+        <div class="card border border-5 p-3 rounded rounded04" style="width: 25rem; margin-left: 20px; margin-top: 50px;">
             @php
             $str = (explode("-",$value->gambar));
             @endphp
             <img width="300px" height="300px" src="{{ asset("photo/".$str[0]."-0.jpg") }}" class="card-img-top">
             <div class="card-body">
                 <h4 class="card-title fw-bold">{{$value->Nama_Motor}}, {{$value->Warna_Motor}}</h4>
-                <div class="card-text" style="height: 230px;">
+                <div class="card-text" style="height: 120px;">
                     <p>Isi Silinder : {{$value->Isi_Silinder}}cc</p>
                     <p>Plat Nomor : {{strtoupper($value->Plat)}}</p>
                     <h5 class="fw-bold">Harga : Rp <?= number_format($value->Harga_sewa,2,",",".") ?>/ hari</h5>

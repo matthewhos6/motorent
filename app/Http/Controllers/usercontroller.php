@@ -105,4 +105,15 @@ class usercontroller extends Controller
 
 
     }
+
+    public function returned(Request $request)
+    {
+        DB::table('transaksi')->where('ID_Trans', $request->id)->update([
+            'Status' => 2
+        ]);
+        DB::table('barang')->where('ID_Barang', $request->btnReturn)->update([
+            'Status' => 1
+        ]);
+        return redirect()->back();
+    }
 }

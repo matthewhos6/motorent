@@ -118,7 +118,7 @@ body{
                                 <td>Rp {{number_format($value->Total,2,",",".")}}</td>
                                 <td>
                                     @if ($value->Status != 0)
-                                        @if ($value->Status == 1)
+                                        @if ($value->Status == 1 || $value->Status == 2)
                                             <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
                                         @else
                                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}
@@ -132,7 +132,7 @@ body{
                                     @endif
                                 </td>
                             </tr>
-                        @elseif ($filter == "Accepted" && $value->Status == 1)
+                        @elseif ($filter == "Accepted" && ($value->Status == 1 || $value->Status == 2))
                             <tr>
                                 <td>{{$value->ID_Trans}}</td>
                                 <td>{{$value->Tanggal_Trans}}</td>
@@ -172,7 +172,7 @@ body{
                                 
                                 <td>
                                     @if ($value->Status != 0)
-                                        @if ($value->Status == 1)
+                                        @if ($value->Status == 1 || $value->Status == 2)
                                             <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
                                         @else
                                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}
@@ -230,7 +230,7 @@ body{
                                 @endif
                                 <td>
                                     @if ($value->Status != 0)
-                                        @if ($value->Status == 1)
+                                        @if ($value->Status == 1 || $value->Status == 2)
                                             <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
                                         @else
                                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}
@@ -288,7 +288,7 @@ body{
                                 @endif
                                 <td>
                                     @if ($value->Status != 0)
-                                        @if ($value->Status == 1)
+                                        @if ($value->Status == 1 || $value->Status == 2)
                                             <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
                                         @else
                                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}

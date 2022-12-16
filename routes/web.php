@@ -81,11 +81,13 @@ Route::middleware('islogin')->group(function () {
         Route::get('/history', function () {
             return view('user.history');
         });
-        
+
         Route::get("/barang/{id}/konfirmasi", [usercontroller::class, "konfirmasi"])->name('konfirmasi');
-        
+
         Route::post("/barang/{id}", [usercontroller::class, "passing"]);
         Route::post("/barang/{id}/konfirmasi", [usercontroller::class, "cout"]);
+
+        Route::post("/returned/{id}", [usercontroller::class, "returned"]);
     });
 });
 

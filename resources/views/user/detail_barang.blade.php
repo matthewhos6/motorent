@@ -89,7 +89,7 @@
         <form action="{{url()->current()}}" method="post">
             @csrf
             <p class="fs-5 fw-light">Mau sewa berapa hari?</p>
-            <input type="number" name="" id="hari"  min="1">  X {{$barang->Harga_sewa}}
+            <input type="number" name="" id="hari"  min="1">  X {{number_format($barang->Harga_sewa,2,",",".")}}
             <br>
             Total : <p id="total" class="fs-2 fw-bold"></p>
             <input type="hidden" name="harga" id="harga">

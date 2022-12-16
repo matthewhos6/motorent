@@ -58,9 +58,9 @@ body{
                     }
                     $listTrans = "";
                     if (Session::get('startDate') != null && Session::get('endDate') != null) {
-                        $listTrans = DB::table('transaksi')->get()->where('Tanggal_Trans', '>=', Session::get('startDate'))->where('Tanggal_Trans', '<=', Session::get('endDate'))->where('Status', '=', '1');
+                        $listTrans = DB::table('transaksi')->where('Status', '=', '1')->orWhere('Status', '=', '2')->get()->where('Tanggal_Trans', '>=', Session::get('startDate'))->where('Tanggal_Trans', '<=', Session::get('endDate'));
                     }else{
-                        $listTrans = DB::table('transaksi')->get()->where('Status', '=', '1');
+                        $listTrans = DB::table('transaksi')->where('Status', '=', '1')->orWhere('Status', '=', '2')->get();
                     }
                     $listUser = DB::table('user')->get();
                     $listKaryawan = DB::table('karyawan')->get();
@@ -128,12 +128,12 @@ body{
                                 <th>Jangka Waktu</th>
                                 <th>End Date</th>
                                 <th>Customer</th>
-                                <th>Barang</th>
+                                <th>Motor</th>
                                 <th>No STNK</th>
                                 <th>Status</th>
                             @elseif ($filter == 3)
-                                <th>Barang</th>
-                                <th>Silinder Mesin</th>
+                                <th>Motor</th>
+                                <th>Gambar</th>
                                 <th>Jumlah Hari Di Pinjam</th>
                             @elseif ($filter == 4)
                                 <th>Username</th>
@@ -204,7 +204,7 @@ body{
                                 <td>Rp {{number_format($value->Total,2,",",".")}}</td>
                                 <td>
                                     @if ($value->Status != 0)
-                                        @if ($value->Status == 1)
+                                        @if ($value->Status == 1 || $value->Status == 2)
                                             <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
                                         @else
                                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}
@@ -243,7 +243,7 @@ body{
                                     
                                 @endforelse
                                 <tr>
-                                    @if ($value->End_Date > date("Y-m-d") && $value->Status == 1)
+                                    @if ($value->End_Date > date("Y-m-d") && ($value->Status == 1))
                                         @php
                                             $num += 1;
                                         @endphp
@@ -268,7 +268,7 @@ body{
                                     $listTrans = DB::select('SELECT b.nama_motor,tr.FK_ID_Barang,sum(tr.FK_ID_SUBSCRIPTION) as durasi
                                             FROM transaksi tr
                                             INNER JOIN barang b on tr.FK_ID_Barang = b.ID_Barang
-                                            WHERE tr.Status = 1 GROUP BY tr.FK_ID_Barang,b.nama_motor');
+                                            WHERE tr.Status = 1 or tr.Status = 2 GROUP BY tr.FK_ID_Barang,b.nama_motor');
 
                             @endphp
                             @forelse ($listTrans as $value)
@@ -282,9 +282,25 @@ body{
                                 @endif
                                 @empty
                                 @endforelse
+
+                                @forelse ($listBarang as $barang)
+                                @if ($barang->ID_Barang == $value->FK_ID_Barang)
+                                    @php
+                                        $barangnya = $barang->Nama_Motor;
+                                        $stnk = $barang->No_STNK;
+                                        $gambarnya = $barang->gambar;
+                                    @endphp
+                                @endif
+                            @empty
+                                
+                            @endforelse
                                 <tr>
                                     <td>{{$value->nama_motor}}</td>
-                                    <td>{{$silinder}}</td>
+                                    @if ($gambarnya == null)
+                                        <td>Belum input gambar</td>
+                                    @else
+                                        <td> <img src="{{ asset("photo/".$gambarnya) }}" style="margin: 10px;width:120px;height:120px;"></td>
+                                    @endif
                                     <td>{{$value->durasi}}</td>
                                 </tr>
 
@@ -296,7 +312,7 @@ body{
                                 $listTrans = DB::select('SELECT u.Username,u.fullname,count(tr.FK_ID_USER) as transaksinya,sum(tr.Total) as total
                                         FROM transaksi tr
                                         INNER JOIN user u on tr.FK_ID_USER = u.ID_User
-                                        WHERE tr.Status = 1 GROUP BY u.Username,u.fullname');
+                                        WHERE tr.Status = 1 or tr.Status = 2 GROUP BY u.Username,u.fullname');
                             @endphp
                             @forelse ($listTrans as $value)
                                 <tr>
@@ -314,7 +330,7 @@ body{
                             $listTrans = DB::select('SELECT k.Username_Karyawan,k.Nama_Karyawan,count(tr.FK_ID_KARYAWAN) as transaksinya,sum(tr.Total) as total
                                     FROM transaksi tr
                                     INNER JOIN karyawan k on tr.FK_ID_KARYAWAN = k.ID_Karyawan
-                                    WHERE tr.Status = 1 GROUP BY k.Username_Karyawan,k.Nama_Karyawan');
+                                    WHERE tr.Status = 1 or tr.Status = 2 GROUP BY k.Username_Karyawan,k.Nama_Karyawan');
                             @endphp
                             @forelse ($listTrans as $value)
                                 <tr>
