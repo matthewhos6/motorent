@@ -69,6 +69,7 @@ body{
                             <th>Total</th>                  
                             {{-- <th>Bukti bayar</th> --}}
                             <th>Action/Status</th>
+                            <th>Input pengambilan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,7 +130,24 @@ body{
                                             <button name="btnRejectTrans" value="1" type="submit" class="btn btn-danger">Reject</button>
                                             <button name="btnAcceptTrans" value="1" type="submit" class="btn btn-success">Accept</button>
                                         </form>
-                                    @endif
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($value->Status == 1 || $value->Status == 2)
+                                            @if ($value->sudah_diambil == null)
+                                            <form method="POST" action="{{url('admin/ambilmotor/'.$value->ID_Trans)}}">
+                                                @csrf
+                                                <input type="text" name="inp_kode">
+                                                <button type="submit" class="btn btn-success">Check</button>
+                                            </form>
+                                            <p style="color: red">{{Session::get('salah'.$value->ID_Trans)}}</p>
+                                            @else
+                                                <p style='color: green;'>Telah diambil</p>
+                                            @endif
+                                        @else
+                                            <h1 style='color: red;'>X</h1>
+                                        @endif
+                                    
                                 </td>
                             </tr>
                         @elseif ($filter == "Accepted" && ($value->Status == 1 || $value->Status == 2))
@@ -184,6 +202,7 @@ body{
                                             <button name="btnAcceptTrans" value="1" type="submit" class="btn btn-success">Accept</button>
                                         </form>
                                     @endif
+                                    <td></td>
                                 </td>
                             </tr>
                         @elseif ($filter == "Rejected" && $value->Status == -1)
@@ -223,11 +242,6 @@ body{
                                 <td>{{$barangnya}}</td>
                                 <td>{{$stnk}}</td>
                                 <td>Rp {{number_format($value->Total,2,",",".")}}</td>
-                                @if ($value->Bukti_Bayar != null)
-                                    <td><img src="assets/bukti/'.{{$value->Bukti_Bayar}}.'" style="width: 200px;height: 200px;"></td>
-                                @else
-                                    <td>Belum ada bukti bayar!</td>
-                                @endif
                                 <td>
                                     @if ($value->Status != 0)
                                         @if ($value->Status == 1 || $value->Status == 2)
@@ -243,6 +257,7 @@ body{
                                         </form>
                                     @endif
                                 </td>
+                                <td></td>
                             </tr>
                         @elseif ($filter == "Pending" && $value->Status == 0)
                             <tr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\users;
+use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -61,9 +62,25 @@ class MasterAdminController extends Controller
         if ($request->btnRejectTrans == 1) {
             DB::table('transaksi')->where('ID_Trans', $request->trans)->update(['FK_ID_Karyawan' => $request->karyawan , 'Status' => -1]);
         }else{
-            DB::table('transaksi')->where('ID_Trans', $request->trans)->update(['FK_ID_Karyawan' => $request->karyawan , 'Status' => 1]);
+            DB::table('transaksi')->where('ID_Trans', $request->trans)->update(['FK_ID_Karyawan' => $request->karyawan , 'Status' => 1,'kode_ambil'=>Str::random(7)]);
         }
         return redirect(url("/admin/transaksi"));
+    }
+
+    public function ambilmotor(Request $request)
+    {
+        # code...
+        // dd("oek");
+        $table=DB::table('transaksi')->where('ID_Trans', $request->trans)->first();
+        // dd($table->kode_ambil);
+        if ($table->kode_ambil==$request->inp_kode) {
+            # code...
+            DB::table('transaksi')->where('ID_Trans', $request->trans)->update(['sudah_diambil' => 1]);
+        }
+        else {
+            Session::put("salah".$request->trans,"Kode ambil salah");
+        }
+        return back();
     }
 
     public function filterreport(Request $request){

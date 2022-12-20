@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2022 at 07:55 PM
+-- Generation Time: Dec 20, 2022 at 03:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `motorentfai`
 --
-CREATE DATABASE IF NOT EXISTS `k1motorent_motorent` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `k1motorent_motorent`;
 
 -- --------------------------------------------------------
 
@@ -29,7 +27,6 @@ USE `k1motorent_motorent`;
 -- Table structure for table `asuransi`
 --
 
-DROP TABLE IF EXISTS `asuransi`;
 CREATE TABLE `asuransi` (
   `ID_Asuransi` int(11) NOT NULL,
   `Nama_Asuransi` varchar(255) NOT NULL,
@@ -42,7 +39,6 @@ CREATE TABLE `asuransi` (
 -- Table structure for table `barang`
 --
 
-DROP TABLE IF EXISTS `barang`;
 CREATE TABLE `barang` (
   `ID_Barang` int(11) NOT NULL,
   `No_Rangka` varchar(50) NOT NULL,
@@ -66,7 +62,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`ID_Barang`, `No_Rangka`, `No_Mesin`, `Plat`, `No_BPKB`, `No_STNK`, `Harga_sewa`, `Isi_Silinder`, `Nama_Motor`, `Warna_Motor`, `Tahun_Pembuatan`, `gambar`, `jumlah_gambar`, `Status`, `FK_ID_ASURANSI`) VALUES
-(15, 'saya', 'asddas', 'gelap', 'adsads', 'ads', 11, 3, 'dhana', 'hitam biar sangar', '2022-12-06', 'MxbJ6cTD', 2, 1, NULL);
+(15, 'saya', 'asddas', 'gelap', 'adsads', 'ads', 11, 3, 'dhana', 'hitam biar sangar', '2022-12-06', 'MxbJ6cTD', 2, 0, NULL),
+(16, 'IOJDKXJEIUSODX', 'VFXOKOPRDVFX', 'L 8573 VC', 'IODFIMREOFCF', 'NJKFDJ89DFIJFK', 10000, 125, 'vario', 'merah', '2022-12-13', '0nXo57WP-2.jpg', 3, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -74,7 +71,6 @@ INSERT INTO `barang` (`ID_Barang`, `No_Rangka`, `No_Mesin`, `Plat`, `No_BPKB`, `
 -- Table structure for table `jabatan`
 --
 
-DROP TABLE IF EXISTS `jabatan`;
 CREATE TABLE `jabatan` (
   `ID_Jabatan` int(11) NOT NULL,
   `Nama_Jabatan` varchar(255) NOT NULL
@@ -95,7 +91,6 @@ INSERT INTO `jabatan` (`ID_Jabatan`, `Nama_Jabatan`) VALUES
 -- Table structure for table `karyawan`
 --
 
-DROP TABLE IF EXISTS `karyawan`;
 CREATE TABLE `karyawan` (
   `ID_Karyawan` int(11) NOT NULL,
   `Nama_Karyawan` varchar(255) NOT NULL,
@@ -113,7 +108,8 @@ CREATE TABLE `karyawan` (
 INSERT INTO `karyawan` (`ID_Karyawan`, `Nama_Karyawan`, `NomorTelepon_Karyawan`, `Username_Karyawan`, `Password_Karyawan`, `FK_ID_JABATAN`, `KTP_Karyawan`) VALUES
 (1, 'matthew', 7653543, 'matt', '$2a$04$s3k5jdbZLr2tWqJw/sqV3O6yiVzoLpraPYtJKE7yCwtz9IYuS.hKm', 0, NULL),
 (2, 'managernya', 6543245, 'manager', '$2a$04$s3k5jdbZLr2tWqJw/sqV3O6yiVzoLpraPYtJKE7yCwtz9IYuS.hKm', 2, NULL),
-(3, 'annoedo', 675434, 'annos', '$2a$04$s3k5jdbZLr2tWqJw/sqV3O6yiVzoLpraPYtJKE7yCwtz9IYuS.hKm', 1, NULL);
+(3, 'annoedo', 675434, 'annos', '$2a$04$s3k5jdbZLr2tWqJw/sqV3O6yiVzoLpraPYtJKE7yCwtz9IYuS.hKm', 1, NULL),
+(4, 'maria', 98433, 'maria', '$2y$10$SwQJxaH0m7qgsnAObl88XemFFQPAb/rvxVzVZCjjNW8U3IYB6kXc2', 0, 'JCABpOW6.png');
 
 -- --------------------------------------------------------
 
@@ -121,7 +117,6 @@ INSERT INTO `karyawan` (`ID_Karyawan`, `Nama_Karyawan`, `NomorTelepon_Karyawan`,
 -- Table structure for table `subscription`
 --
 
-DROP TABLE IF EXISTS `subscription`;
 CREATE TABLE `subscription` (
   `ID_Subscription` int(11) NOT NULL,
   `Nama_Subscription` varchar(255) NOT NULL,
@@ -141,7 +136,6 @@ INSERT INTO `subscription` (`ID_Subscription`, `Nama_Subscription`, `Jumlah_Hari
 -- Table structure for table `transaksi`
 --
 
-DROP TABLE IF EXISTS `transaksi`;
 CREATE TABLE `transaksi` (
   `ID_Trans` int(11) NOT NULL,
   `FK_ID_USER` int(11) NOT NULL,
@@ -153,8 +147,23 @@ CREATE TABLE `transaksi` (
   `FK_ID_SUBSCRIPTION` int(11) DEFAULT NULL,
   `End_Date` date NOT NULL,
   `Bukti_Bayar` varchar(255) DEFAULT NULL,
-  `Status` int(2) NOT NULL COMMENT '-1 = ditolak\r\n0 = pending\r\n1 = diterima'
+  `Status` int(2) NOT NULL COMMENT '-1 = ditolak\r\n0 = pending\r\n1 = diterima',
+  `kode_ambil` varchar(7) DEFAULT NULL,
+  `sudah_diambil` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`ID_Trans`, `FK_ID_USER`, `FK_ID_Karyawan`, `FK_ID_Barang`, `Total`, `Tanggal_Trans`, `Start_Date`, `FK_ID_SUBSCRIPTION`, `End_Date`, `Bukti_Bayar`, `Status`, `kode_ambil`, `sudah_diambil`) VALUES
+(5, 4, 1, 15, 11, '2022-12-07', '2022-12-07', NULL, '2022-12-08', NULL, 2, NULL, 0),
+(6, 4, NULL, 15, 132, '2022-12-15', '2022-12-15', NULL, '2022-12-27', NULL, 2, NULL, 0),
+(7, 4, 4, 16, 30000, '2022-12-16', '2022-12-16', NULL, '2022-12-19', NULL, 2, NULL, 0),
+(8, 4, 1, 16, 120000, '2022-12-18', '2022-12-18', NULL, '2022-12-30', NULL, 2, NULL, 0),
+(9, 4, 1, 15, 132, '2022-12-20', '2022-12-20', NULL, '2023-01-01', NULL, 2, 'nESA7Jt', 1),
+(10, 4, 1, 16, 10000, '2022-12-20', '2022-12-20', NULL, '2022-12-21', NULL, -1, NULL, 0),
+(11, 4, 1, 15, 11, '2022-12-20', '2022-12-20', NULL, '2022-12-21', NULL, 1, 'akRV7xv', 1);
 
 -- --------------------------------------------------------
 
@@ -162,7 +171,6 @@ CREATE TABLE `transaksi` (
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `ID_User` int(11) NOT NULL,
   `fullname` varchar(255) NOT NULL,
@@ -251,13 +259,13 @@ ALTER TABLE `asuransi`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `ID_Barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_Barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `ID_Karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_Karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subscription`
@@ -269,7 +277,7 @@ ALTER TABLE `subscription`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `ID_Trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_Trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`

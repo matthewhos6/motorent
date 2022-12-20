@@ -77,7 +77,7 @@
         <div class="col">
             <div class="detail text-center">
                 <p class="fs-2 fw-light">Tipe : {{$barang->Nama_Motor}}</p>
-                <p class="fs-3 fw-light">Harga Sewa : {{number_format($barang->Harga_sewa,2,",",".")}}</p>
+                <p class="fs-3 fw-light">Harga Sewa : Rp {{number_format($barang->Harga_sewa,2,",",".")}}</p>
                 <p class="fs-3 fw-light">Rangka : {{$barang->No_Rangka}}</p>
                 <p class="fs-3 fw-light">Plat Nomor :{{$barang->Plat}}</p>
                 <p class="fs-3 fw-light">Warna :{{$barang->Warna_Motor}}</p>

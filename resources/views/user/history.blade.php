@@ -32,6 +32,7 @@
             $karyawannya = "";
             $barangnya = "";
             $stnk = "";
+            $kode_ambil = $value->kode_ambil;
         @endphp
             <tr>
                 <td>{{$value->ID_Trans}}</td>
@@ -72,7 +73,7 @@
                 <td>
                     @if ($value->Status != 0)
                         @if ($value->Status == 1 || $value->Status == 2)
-                            <p style='color: green;'>Accepted</p> By: {{$karyawannya}}
+                            <p style='color: green;'>Accepted</p><p style='color: green;'>Kode pengambilan: {{$kode_ambil}}</p> By: {{$karyawannya}}
                         @else
                             <p style='color: red;'>Rejected</p> By: {{$karyawannya}}
                         @endif
@@ -83,7 +84,14 @@
                 <td>
                     @if ($value->Status == 2)
                         <p style='color: green;'>Returned</p>
-                    @else
+                    @elseif ($value->Status == -1)
+                        
+                        <form action="{{url('user/returned/'.$value->ID_Trans )}}" method="post">
+                            @csrf
+                            <button name="btnReturn" value="{{$value->FK_ID_Barang}}" type="submit" class="btn btn-secondary" disabled>Return</button>
+                        </form>
+                        
+                    @elseif($value->Status == 1)
                         <form action="{{url('user/returned/'.$value->ID_Trans )}}" method="post">
                             @csrf
                             <button name="btnReturn" value="{{$value->FK_ID_Barang}}" type="submit" class="btn btn-success">Return</button>

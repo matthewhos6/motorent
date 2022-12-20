@@ -43,6 +43,7 @@ Route::middleware('isadmin')->group(function () {
     Route::prefix("/admin")->group(function() {
         Route::POST("/filtertrans", [MasterAdminController::class, "filtertrans"]);
         Route::POST("/transstatus/{trans}/{karyawan}", [MasterAdminController::class, "transstatus"]);
+        Route::POST("/ambilmotor/{trans}", [MasterAdminController::class, "ambilmotor"]);
         Route::POST("/filterreport", [MasterAdminController::class, "filterreport"]);
         Route::POST("/searchkaryawan", [MasterAdminController::class, "searchkaryawan"]);
         Route::POST("/tambahkaryawan", [MasterAdminController::class, "tambahkaryawan"]);
