@@ -1,2 +1,3 @@
 A website that helps with motorcycle stock and data management <br>
 where the users can also rent motorcycles![http://192.168.9.220:3000/FAI2022/Kelompok1-MotoRent/src/028125554db9fbf2e5ea299bc3a6527df2ef9e2d/documentation/ActionBarang.png](http://)
+- <a href="http://192.168.9.220:3000/FAI2022/Kelompok1-MotoRent/src/e52d08876ed52778a32eb071279e59379800c5a3/documentation/ActionBarang.png">foto 1</a>
